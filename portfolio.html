@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maricela Belén Milde | Systems Analyst & Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #000000; color: #a1a1aa; margin: 0; }
+        .logo-font { font-family: 'Dancing Script', cursive; }
+        .accent-purple { color: #a855f7; }
+        .bg-card { background-color: #09090b; border: 1px solid #18181b; transition: all 0.3s ease; }
+        .bg-card:hover { border-color: #a855f7; }
+        .tag { border: 1px solid #3f3f46; padding: 4px 12px; border-radius: 9999px; font-size: 0.7rem; color: #d4d4d8; display: inline-block; margin: 2px; }
+        .photo-container { position: relative; width: 260px; height: 260px; }
+        .photo-container img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 2px solid #a855f7; box-shadow: 0 0 30px rgba(168, 85, 247, 0.3); }
+        .lang-btn { border: 1px solid #a855f7; color: #a855f7; padding: 6px 18px; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .lang-btn:hover { background: #a855f7; color: white; box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
+    </style>
+</head>
+<body id="home" class="selection:bg-purple-500/30">
+
+    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-20 py-5 bg-black/95 backdrop-blur-md border-b border-zinc-900">
+        <div class="logo-font text-2xl accent-purple">Maricela Belén Milde</div>
+        <div class="flex items-center gap-6">
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-zinc-300">
+                <a href="#home" data-en="Home" data-es="Inicio">Inicio</a>
+                <a href="#about" data-en="About" data-es="Perfil">Perfil</a>
+                <a href="#projects" data-en="Projects" data-es="Proyectos">Proyectos</a>
+                <a href="#experience" data-en="Experience" data-es="Experiencia">Experiencia</a>
+            </div>
+            <button onclick="toggleLanguage()" class="lang-btn" id="lang-toggle">English Version</button>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-6 md:px-0 pt-32 pb-20">
+        
+        <section id="about" class="flex flex-col md:flex-row items-center justify-between py-12 gap-12 border-b border-zinc-900">
+            <div class="md:w-3/5 text-center md:text-left">
+                <h1 class="text-5xl font-bold text-white mb-6 tracking-tight" data-en="Systems Analyst & Developer" data-es="Analista de Sistemas & Developer">Analista de Sistemas & Developer</h1>
+                <p class="text-lg text-zinc-300 leading-relaxed mb-8" id="profile-desc" 
+                   data-en="Systems Analyst with strong data analysis and software architecture skills. Specialist in process optimization through advanced management tools and modular development. Experience in critical data flow management, preventive cybersecurity, and requirements engineering in bilingual environments."
+                   data-es="Analista de Sistemas con sólida capacidad para el análisis de datos y la arquitectura de software. Especialista en optimización de procesos mediante herramientas avanzadas de gestión y desarrollo modular. Experiencia en administración de flujos de información críticos, ciberseguridad preventiva e ingeniería de requerimientos en entornos bilingües.">
+                    Analista de Sistemas con sólida capacidad para el análisis de datos y la arquitectura de software. Especialista en optimización de procesos mediante herramientas avanzadas de gestión y desarrollo modular. Experiencia en administración de flujos de información críticos, ciberseguridad preventiva e ingeniería de requerimientos en entornos bilingües.
+                </p>
+                <div class="flex gap-4 justify-center md:justify-start">
+                    <span class="tag">Oberá, Misiones</span>
+                    <span class="tag" data-en="Bilingual (EN/ES)" data-es="Bilingüe (EN/ES)">Bilingüe (EN/ES)</span>
+                </div>
+            </div>
+            <div class="md:w-2/5 flex justify-center">
+                <div class="photo-container">
+                    <img src="curriculumimage.jpeg" alt="Maricela Belén Milde">
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20 border-b border-zinc-900">
+            <h2 class="text-3xl font-bold text-white mb-10" data-en="Featured Project" data-es="Proyecto Destacado">Proyecto Destacado</h2>
+            <div class="bg-card p-8 md:p-12 rounded-3xl border border-zinc-800">
+                <div class="flex flex-col md:flex-row justify-between items-start mb-8">
+                    <div>
+                        <h3 class="text-3xl font-bold text-white mb-2">MediGest Pro</h3>
+                        <p class="accent-purple font-medium uppercase text-xs tracking-widest" data-en="Health Management System" data-es="Sistema de Gestión Hospitalaria">Sistema de Gestión Hospitalaria</p>
+                    </div>
+                    <a href="gestsystem.html" target="_blank" class="mt-4 md:mt-0 bg-white text-black px-8 py-3 rounded-full font-bold text-sm hover:bg-purple-600 hover:text-white transition-all shadow-lg" data-en="Launch Live Project ↗" data-es="Lanzar Proyecto ↗">Lanzar Proyecto ↗</a>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="space-y-4">
+                        <p class="text-zinc-400" data-en="Architected a comprehensive bilingual system (+1700 lines of code) using JS, HTML5, and CSS3. Key features include an automated Triage algorithm for patient prioritization and scalable secure architectures." data-es="Arquitecturé un sistema integral bilingüe de +1700 líneas de código (JS/HTML5/CSS3). Incluye un algoritmo de Triage médico automatizado para priorización crítica y arquitecturas escalables enfocadas en seguridad.">Arquitecturé un sistema integral bilingüe de +1700 líneas de código (JS/HTML5/CSS3). Incluye un algoritmo de Triage médico automatizado para priorización crítica y arquitecturas escalables enfocadas en seguridad.</p>
+                        <ul class="text-sm text-zinc-300 space-y-2">
+                            <li data-en="• Keyboard Shortcuts for high-speed workflow" data-es="• Atajos de teclado para flujo de trabajo rápido">• Atajos de teclado para flujo de trabajo rápido</li>
+                            <li data-en="• Native High Contrast & Accessibility mode" data-es="• Modo de Alto Contraste y Accesibilidad nativo">• Modo de Alto Contraste y Accesibilidad nativo</li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-wrap gap-2 content-start">
+                        <span class="tag">JavaScript (ES6+)</span><span class="tag">HTML5 / CSS3</span><span class="tag">UX Health</span><span class="tag">Triage Algorithm</span><span class="tag">SDLC</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 border-b border-zinc-900">
+            <h2 class="text-3xl font-bold text-white mb-12" data-en="Technical Skills" data-es="Competencias Técnicas">Competencias Técnicas</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-card p-8 rounded-2xl">
+                    <h4 class="text-white font-bold mb-4 accent-purple">Core Tech</h4>
+                    <p class="text-sm leading-relaxed" data-en="JavaScript (ES6+), Python, HTML5/CSS3, Git/Versioning, SDLC." data-es="JavaScript (ES6+), Python, HTML5/CSS3, Git/Versionado, SDLC.">JavaScript (ES6+), Python, HTML5/CSS3, Git/Versionado, SDLC.</p>
+                </div>
+                <div class="bg-card p-8 rounded-2xl">
+                    <h4 class="text-white font-bold mb-4 accent-purple" data-en="Data & Tools" data-es="Datos y Herramientas">Datos y Herramientas</h4>
+                    <p class="text-sm leading-relaxed" data-en="Expert Excel, Access DB Management, Data Analysis, Critical Information Audit." data-es="Excel Experto, Gestión de BD Access, Análisis de Datos, Auditoría de información crítica.">Excel Experto, Gestión de BD Access, Análisis de Datos, Auditoría de información crítica.</p>
+                </div>
+                <div class="bg-card p-8 rounded-2xl">
+                    <h4 class="text-white font-bold mb-4 accent-purple" data-en="Management" data-es="Gestión">Gestión</h4>
+                    <p class="text-sm leading-relaxed" data-en="Requirements Engineering, Cybersecurity, HR Management, Technical Support." data-es="Ingeniería de Requerimientos, Ciberseguridad, Gestión de RRHH, Soporte Técnico.">Ingeniería de Requerimientos, Ciberseguridad, Gestión de RRHH, Soporte Técnico.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-20">
+            <h2 class="text-3xl font-bold text-white mb-12" data-en="Work History" data-es="Trayectoria Laboral">Trayectoria Laboral</h2>
+            <div class="space-y-12">
+                <div class="border-l-2 border-purple-600 pl-8 relative">
+                    <div class="absolute w-3 h-3 bg-purple-600 rounded-full -left-[7px] top-1.5"></div>
+                    <h3 class="text-xl font-bold text-white">TDS Misiones</h3>
+                    <p class="accent-purple text-sm mb-4" data-en="Data Management & Tech Support | 2024 - Present" data-es="Gestión de Datos y Soporte Técnico | 2024 - Actualidad">Gestión de Datos y Soporte Técnico | 2024 - Actualidad</p>
+                    <ul class="text-sm text-zinc-400 space-y-2 list-disc ml-4">
+                        <li data-en="Validation of data flows to ensure corporate information integrity." data-es="Validación de flujos de datos para asegurar la integridad corporativa.">Validación de flujos de datos para asegurar la integridad corporativa.</li>
+                        <li data-en="Code Backup Management and version control for digital assets." data-es="Code Backup Management y administración de versionado de activos digitales.">Code Backup Management y administración de versionado de activos digitales.</li>
+                    </ul>
+                </div>
+
+                <div class="border-l-2 border-zinc-800 pl-8 relative">
+                    <div class="absolute w-3 h-3 bg-zinc-800 rounded-full -left-[7px] top-1.5"></div>
+                    <h3 class="text-xl font-bold text-white">Dresses by Shine / Shine by NM</h3>
+                    <p class="accent-purple text-sm mb-4" data-en="Data Management Analyst | 2020 - 2025" data-es="Analista de Gestión de Datos | 2020 - 2025">Analista de Gestión de Datos | 2020 - 2025</p>
+                    <p class="text-sm text-zinc-400" data-en="Audit of financial input/output and implementation of critical record backup policies." data-es="Auditoría de entrada/salida financiera e implementación de políticas de respaldo de registros críticos.">Auditoría de entrada/salida financiera e implementación de políticas de respaldo de registros críticos.</p>
+                </div>
+            </div>
+
+            <div class="mt-20 bg-card p-8 rounded-2xl border-l-4 border-purple-600">
+                <h4 class="text-white font-bold mb-6 text-xl" data-en="Education" data-es="Educación">Educación</h4>
+                <div class="grid md:grid-cols-2 gap-4 text-sm text-zinc-300">
+                    <div>• <span class="text-white font-semibold">IPESMI:</span> Systems Analyst (En curso)</div>
+                    <div>• <span class="text-white font-semibold">CODERHOUSE:</span> Python Developer</div>
+                    <div>• <span class="text-white font-semibold">MICROVERSE:</span> Fullstack Developer</div>
+                    <div>• <span class="text-white font-semibold">INST. LINNEO:</span> English (Advanced)</div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="pt-20 pb-10 text-center border-t border-zinc-900">
+            <h2 class="text-2xl font-bold text-white mb-6">belen0010mm@gmail.com</h2>
+            <div class="text-zinc-500 text-sm space-y-1">
+                <p>Oberá, Misiones | 3755 341452</p>
+                <p class="text-[10px] text-zinc-800 uppercase tracking-widest pt-10">© 2024 Maricela Belén Milde</p>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        let currentLang = 'es';
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            document.querySelectorAll('[data-en]').forEach(el => {
+                el.innerText = el.getAttribute(`data-${currentLang}`);
+            });
+            document.getElementById('lang-toggle').innerText = currentLang === 'es' ? 'English Version' : 'Versión Español';
+        }
+    </script>
+</body>
+</html>
