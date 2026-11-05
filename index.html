@@ -283,9 +283,85 @@ footer{display:block;padding:0 3rem 2rem}
 .name-char{display:inline-block;transition:transform .35s cubic-bezier(.34,1.56,.64,1),color .25s;cursor:default}
 .name-char:hover{transform:translateY(-5px) rotate(-4deg);color:var(--accent3) !important;-webkit-text-fill-color:var(--accent3) !important}
 #terminal-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
+
+.about-photo-wrap{
+  position:relative;width:220px;height:220px;flex-shrink:0;
+  margin-bottom:1.5rem;
+}
+.about-photo-glow{
+  position:absolute;inset:-24px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(255,45,130,0.26) 0%,rgba(200,10,80,0.10) 50%,transparent 70%);
+  animation:orb-breathe 5s ease-in-out infinite;
+  pointer-events:none;
+}
+.about-photo-ring{
+  position:absolute;inset:-4px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent2),var(--accent),var(--pink-light),var(--accent2));
+  background-size:300% 300%;
+  animation:gradient-spin 4s linear infinite;
+  padding:3px;
+}
+@keyframes gradient-spin{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.about-photo-ring-inner{
+  width:100%;height:100%;border-radius:50%;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+}
+.about-photo{
+  width:214px;height:214px;border-radius:50%;
+  object-fit:cover;object-position:center 30%;
+  display:block;
+  transition:transform 0.3s ease;
+}
+.about-photo-wrap:hover .about-photo{transform:scale(1.04)}
+
+.proj-bullets{list-style:none;display:grid;gap:.45rem;margin:.25rem 0}.proj-bullets li{font-size:.9rem;color:var(--muted);line-height:1.55}.proj-bullets li::before{content:"▸ ";color:var(--accent)}
+/* ===== FX LAYER: capas visuales (red de nodos, spotlight, HUD, cubo 3D, tarjetas reactivas) ===== */
+#fx-net,#fx-spot{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+#fx-net{opacity:.5}body.light #fx-net{opacity:.22}
+#fx-spot{background:radial-gradient(560px circle at var(--mx,50%) var(--my,30%),rgba(255,45,130,.11),transparent 65%)}
+#fx-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:9500;transform:scaleX(0);transform-origin:0 50%;background:linear-gradient(90deg,var(--accent2),var(--accent3),#a855f7);box-shadow:0 0 12px var(--accent);pointer-events:none}
+#fx-scan{position:fixed;left:0;right:0;top:0;height:140px;z-index:9400;pointer-events:none;opacity:0;background:linear-gradient(180deg,transparent,rgba(255,45,130,.14) 70%,rgba(255,128,192,.6) 98%,transparent)}
+#fx-scan.go{animation:fx-scan .8s ease-out}
+@keyframes fx-scan{0%{opacity:1;transform:translateY(-140px)}100%{opacity:0;transform:translateY(100vh)}}
+#fx-sec{position:fixed;left:1.5rem;bottom:1.25rem;z-index:50;font:10px var(--mono);letter-spacing:.15em;color:var(--muted2);text-transform:uppercase;pointer-events:none}
+#fx-sec b{color:var(--accent);font-weight:500}
+.fx-cube-wrap{--s:60px;position:absolute;z-index:0;left:7%;bottom:16%;width:var(--s);height:var(--s);perspective:520px;pointer-events:none;opacity:.6;transform:translate(calc(var(--px,0)*-22px),calc(var(--py,0)*-14px + var(--sy,0)*-.1px))}
+.fx-cube{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:fx-spin 16s linear infinite}
+.fx-cube i{position:absolute;inset:0;border:1px solid rgba(255,45,130,.6);background:rgba(255,45,130,.05);box-shadow:inset 0 0 14px rgba(255,45,130,.18)}
+.fx-cube i:nth-child(1){transform:translateZ(calc(var(--s)/2))}.fx-cube i:nth-child(2){transform:rotateY(180deg) translateZ(calc(var(--s)/2))}
+.fx-cube i:nth-child(3){transform:rotateY(90deg) translateZ(calc(var(--s)/2))}.fx-cube i:nth-child(4){transform:rotateY(-90deg) translateZ(calc(var(--s)/2))}
+.fx-cube i:nth-child(5){transform:rotateX(90deg) translateZ(calc(var(--s)/2))}.fx-cube i:nth-child(6){transform:rotateX(-90deg) translateZ(calc(var(--s)/2))}
+@keyframes fx-spin{to{transform:rotateX(360deg) rotateY(360deg)}}
+.fx-hud{position:absolute;z-index:0;right:2rem;bottom:2rem;font:10px var(--mono);letter-spacing:.12em;color:var(--muted2);text-transform:uppercase;line-height:1.9;text-align:right;pointer-events:none;padding:.7rem 1rem;border:.5px solid var(--border);border-radius:4px;background:rgba(10,4,14,.35);backdrop-filter:blur(6px)}
+.fx-hud b{color:var(--accent);font-weight:500}
+.fx-hud .ok::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#3ddc97;margin-right:6px;box-shadow:0 0 8px #3ddc97;animation:fx-blink 2s ease-in-out infinite}
+@keyframes fx-blink{50%{opacity:.3}}
+.proj-card .glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(320px circle at var(--gx,50%) var(--gy,50%),rgba(255,140,190,.16),transparent 60%)}
+.proj-card:hover .glare{opacity:1}
+@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+.proj-card::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;background:conic-gradient(from var(--ang),transparent 0 55%,var(--accent) 78%,var(--accent3) 90%,transparent);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;animation:fx-ang 3.5s linear infinite}
+.proj-card:hover::after{opacity:1}
+@keyframes fx-ang{to{--ang:360deg}}
+.fx-flow{margin-top:2.5rem;border:.5px solid var(--border);border-radius:16px;padding:1.1rem 1.25rem;background:var(--glass-bg);backdrop-filter:blur(14px)}
+.fx-flow-label{font:10px var(--mono);letter-spacing:.15em;color:var(--muted2);text-transform:uppercase;margin-bottom:.6rem}
+.fx-flow-scroll{overflow-x:auto}.fx-flow svg{display:block;width:100%;min-width:640px;height:auto}
+.fx-flow .nd{fill:rgba(255,45,130,.07);stroke:var(--border2)}.fx-flow .nd.hot{stroke:var(--accent);filter:drop-shadow(0 0 6px rgba(255,45,130,.5))}
+.fx-flow text{font:11px var(--mono);fill:var(--text);text-anchor:middle;dominant-baseline:middle}
+.fx-flow .ln{fill:none;stroke:var(--accent);stroke-opacity:.55;stroke-width:1.2;stroke-dasharray:4 6;animation:fx-dash 1.4s linear infinite}
+@keyframes fx-dash{to{stroke-dashoffset:-20}}
+.fx-flow .pk{fill:var(--accent3)}
+.lang-flip [data-i18n],.lang-flip [data-i18n-html]{animation:fx-flip .55s backwards}
+@keyframes fx-flip{from{opacity:.15;filter:blur(4px)}}
+.fx-skip{position:fixed;left:1rem;top:-3rem;z-index:10000;background:var(--accent);color:#fff;padding:.5rem 1rem;border-radius:8px;font:12px var(--mono)}.fx-skip:focus{top:1rem}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent3);outline-offset:3px}
+@media(pointer:coarse){#fx-spot{display:none}}
+@media(max-width:768px){#fx-sec{display:none}.fx-hud{right:1rem;bottom:1rem}.fx-hud .hide-sm{display:none}.fx-cube-wrap{--s:40px;left:5%;bottom:24%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}#fx-spot,#fx-scan,.fx-cube-wrap{display:none}}
 </style>
 </head>
 <body>
+<a class="fx-skip" href="#about">Saltar al contenido</a>
 <div id="alfred-scene"></div>
 <div id="alfred-wave"></div>
 <canvas id="mesh-canvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.55"></canvas>
@@ -314,7 +390,7 @@ footer{display:block;padding:0 3rem 2rem}
   <div class="egg-inner">
     <span class="egg-star">⭐</span>
     <div class="egg-title">MediGest unlocked</div>
-    <div class="egg-subtitle">// proyecto estrella · 2025–2026</div>
+    <div class="egg-subtitle">// proyecto · 2025–2026</div>
     <p class="egg-text">Un sistema de gestión hospitalaria construido desde cero.<br>Con amor, cafeína y muchas líneas de código.<br>Bilingüe. Escalable. Seguro. <em style="color:var(--accent3);font-style:normal">Mío.</em></p>
     <div class="egg-stack">
       <span class="egg-tag"><i class="devicon-nodejs-plain di"></i>Node.js</span><span class="egg-tag"><i class="devicon-postgresql-plain di"></i>PostgreSQL</span><span class="egg-tag"><i class="devicon-redis-plain di"></i>Redis</span><span class="egg-tag">WebSockets</span><span class="egg-tag">JWT</span>
@@ -408,13 +484,21 @@ footer{display:block;padding:0 3rem 2rem}
   <h2 class="section-title reveal">About<br><span style="color:var(--muted2)">me</span></h2>
   <div class="about-grid">
     <div class="reveal">
-      <p class="about-text active" id="text-es">Soy <strong>Analista de Sistemas</strong> con base sólida en arquitectura de software, análisis de datos y desarrollo modular. Me especializo en la administración de flujos de información crítica, <strong>ciberseguridad preventiva</strong> e ingeniería de requerimientos en entornos bilingües.<br><br>Trabajo en la intersección entre la lógica del backend y la claridad del dato: sistemas que no solo funcionan, sino que <strong>escalan y resisten</strong>. Actualmente construyo <strong>MediGest</strong>, un ecosistema de gestión hospitalaria desde cero.</p>
-      <p class="about-text" id="text-en">I'm a <strong>Systems Analyst</strong> with a strong background in software architecture, data analysis and modular development. I specialize in critical information flow management, <strong>preventive cybersecurity</strong> and requirements engineering in bilingual environments.<br><br>I work at the intersection of backend logic and data clarity: systems that don't just work, but <strong>scale and endure</strong>. Currently building <strong>MediGest</strong>, a full hospital management ecosystem from scratch.</p>
+      <p class="about-text active" id="text-es">Soy <strong>Analista de Sistemas</strong> con base sólida en arquitectura de software, análisis de datos y desarrollo modular. Me especializo en la administración de flujos de información crítica, <strong>ciberseguridad preventiva</strong> e ingeniería de requerimientos en entornos bilingües.<br><br>Trabajo en la intersección entre la lógica del backend y la claridad del dato: sistemas que no solo funcionan, sino que <strong>escalan y resisten</strong>. Actualmente desarrollo <strong>Centro de Datos</strong>, un sistema de reportes con datos reales, y <strong>VECTOR</strong>, mi marca de ecosistemas con IA; además sigo construyendo <strong>MediGest</strong>, un ecosistema de gestión hospitalaria desde cero.</p>
+      <p class="about-text" id="text-en">I'm a <strong>Systems Analyst</strong> with a strong background in software architecture, data analysis and modular development. I specialize in critical information flow management, <strong>preventive cybersecurity</strong> and requirements engineering in bilingual environments.<br><br>I work at the intersection of backend logic and data clarity: systems that don't just work, but <strong>scale and endure</strong>. I currently develop <strong>Centro de Datos</strong>, a reporting system running on real data, and <strong>VECTOR</strong>, my brand of AI-powered ecosystems; I also keep building <strong>MediGest</strong>, a full hospital management ecosystem from scratch.</p>
       <div class="about-quote" id="about-quote-text"><em>"</em> Construyo sistemas que importan — donde cada línea de código tiene propósito, cada dato tiene dueño, y cada decisión de diseño tiene consecuencias reales. <em>"</em></div>
     </div>
     <div class="reveal">
-      <div class="skills-group"><div class="skills-group-label" data-i18n="about.coretech">Core Tech</div><div class="chips"><span class="chip accent"><i class="devicon-javascript-plain di"></i>JavaScript ES6+</span><span class="chip accent"><i class="devicon-python-plain di"></i>Python</span><span class="chip"><i class="devicon-html5-plain di"></i>HTML5</span><span class="chip"><i class="devicon-css3-plain di"></i>CSS3</span><span class="chip"><i class="devicon-git-plain di"></i>Git / GitHub</span><span class="chip">SDLC</span><span class="chip">Node.js</span><span class="chip"><i class="devicon-express-original di"></i>Express</span></div></div>
-      <div class="skills-group"><div class="skills-group-label" data-i18n="about.db">Bases de datos & Backend</div><div class="chips"><span class="chip">PostgreSQL</span><span class="chip">Redis</span><span class="chip"><i class="devicon-azuresqldatabase-plain di"></i>SQL</span><span class="chip">Access</span><span class="chip">JWT Auth</span><span class="chip">WebSockets</span><span class="chip">REST APIs</span></div></div>
+      <div class="about-photo-wrap" id="about-photo-el" style="margin:0 auto 2rem auto">
+        <div class="about-photo-glow"></div>
+        <div class="about-photo-ring">
+          <div class="about-photo-ring-inner">
+            <img src="curriculumimage.jpeg" alt="Maricela Belen Milde" class="about-photo">
+          </div>
+        </div>
+      </div>
+      <div class="skills-group"><div class="skills-group-label" data-i18n="about.coretech">Core Tech</div><div class="chips"><span class="chip accent"><i class="devicon-javascript-plain di"></i>JavaScript ES6+</span><span class="chip accent"><i class="devicon-python-plain di"></i>Python</span><span class="chip"><i class="devicon-html5-plain di"></i>HTML5</span><span class="chip"><i class="devicon-css3-plain di"></i>CSS3</span><span class="chip"><i class="devicon-git-plain di"></i>Git / GitHub</span><span class="chip">SDLC</span><span class="chip">Node.js</span><span class="chip"><i class="devicon-express-original di"></i>Express</span><span class="chip"><i class="devicon-react-original di"></i>React</span><span class="chip"><i class="devicon-typescript-plain di"></i>TypeScript</span></div></div>
+      <div class="skills-group"><div class="skills-group-label" data-i18n="about.db">Bases de datos & Backend</div><div class="chips"><span class="chip">PostgreSQL</span><span class="chip">Supabase</span><span class="chip">n8n</span><span class="chip">Redis</span><span class="chip"><i class="devicon-azuresqldatabase-plain di"></i>SQL</span><span class="chip">Access</span><span class="chip">JWT Auth</span><span class="chip">WebSockets</span><span class="chip">REST APIs</span></div></div>
       <div class="skills-group"><div class="skills-group-label" data-i18n="about.office">Office & Datos</div><div class="chips"><span class="chip">Excel (experto)</span><span class="chip">Access DB</span><span class="chip">Word avanzado</span><span class="chip">Análisis de datos</span><span class="chip">Auditoría</span></div></div>
       <div class="skills-group"><div class="skills-group-label" data-i18n="about.soft">Soft Skills</div><div class="chips"><span class="chip">Ing. de requerimientos</span><span class="chip">UX Health</span><span class="chip">Triage médico</span><span class="chip">Gestión de equipos</span><span class="chip">Bilingüe ES/EN</span></div></div>
     </div>
@@ -427,9 +511,77 @@ footer{display:block;padding:0 3rem 2rem}
 <section id="projects">
   <div class="section-tag reveal" data-i18n="proj.tag">Proyectos</div>
   <h2 class="section-title reveal">Projects<br><span style="color:var(--muted2)">showcase</span></h2>
+  <div class="fx-flow reveal">
+    <div class="fx-flow-label" data-i18n="proj.flow">// flujo de datos · Centro de Datos</div>
+    <div class="fx-flow-scroll"><svg viewBox="0 0 860 150" role="img" aria-label="Naaloo, Geest, Obersat → n8n → PostgreSQL → API → Dashboard">
+      <path class="ln" d="M130 25 C190 25 190 75 250 75"/><path class="ln" d="M130 75 L250 75"/><path class="ln" d="M130 125 C190 125 190 75 250 75"/>
+      <path class="ln" d="M350 75 L420 75"/><path class="ln" d="M540 75 L610 75"/><path class="ln" d="M690 75 L760 75"/>
+      <rect class="nd" x="10" y="8" width="120" height="34" rx="8"/><text x="70" y="25">Naaloo</text>
+      <rect class="nd" x="10" y="58" width="120" height="34" rx="8"/><text x="70" y="75">Geest</text>
+      <rect class="nd" x="10" y="108" width="120" height="34" rx="8"/><text x="70" y="125">Obersat</text>
+      <rect class="nd hot" x="250" y="53" width="100" height="44" rx="10"/><text x="300" y="75">n8n</text>
+      <rect class="nd" x="420" y="55" width="120" height="40" rx="8"/><text x="480" y="75">PostgreSQL</text>
+      <rect class="nd" x="610" y="55" width="80" height="40" rx="8"/><text x="650" y="75">API</text>
+      <rect class="nd hot" x="760" y="50" width="90" height="50" rx="10"/><text x="805" y="75">Dashboard</text>
+    </svg></div>
+  </div>
   <div class="projects-grid">
 
-    <!-- PROJECT 1 — MEDIGEST UNIFICADO -->
+    <!-- PROJECT 1 — CENTRO DE DATOS -->
+    <div class="proj-card featured reveal">
+      <div class="proj-card-left">
+        <div class="proj-top">
+          <div><div class="proj-title">Centro de Datos</div><div class="proj-subtitle" data-i18n="proj.tds_sub">Reportes de gestión · sistema interno</div></div>
+          <div class="proj-badges">
+            <span class="mbadge mbadge-purple" data-i18n="proj.star">⭐ Proyecto estrella</span>
+            <span class="mbadge mbadge-green"><span class="active-dot" style="display:inline-block;margin-right:5px"></span><span data-i18n="proj.inuse">En uso</span></span>
+          </div>
+        </div>
+        <p class="proj-desc" data-i18n-html="proj.tds_desc">Sistema interno que centraliza datos operativos de varias fuentes (Naaloo, Geest, Obersat) en una base PostgreSQL propia, alimentada por flujos de n8n. Incluye perfiles de acceso por rol (administrador / técnico) y un centro de control con datos reales.</p>
+        <ul class="proj-bullets"><li data-i18n="proj.cdd_b1">Tres fuentes (Naaloo, Geest, Obersat) en un solo centro de control, con mapa de flota en vivo</li><li data-i18n="proj.cdd_b2">TDS IA: señales con reglas explícitas; la IA solo redacta y el servidor valida cada cifra</li><li data-i18n="proj.cdd_b3">Permisos aplicados en el servidor, auditoría completa y 17 migraciones SQL versionadas</li><li data-i18n="proj.cdd_b4">Nunca inventa datos: sin fuente, muestra «sin datos»</li></ul>
+        <div class="proj-stack"><span class="stack-tag"><i class="devicon-react-original di"></i>React</span><span class="stack-tag"><i class="devicon-typescript-plain di"></i>TypeScript</span><span class="stack-tag"><i class="devicon-postgresql-plain di"></i>PostgreSQL</span><span class="stack-tag">Supabase</span><span class="stack-tag"><i class="devicon-vercel-original di"></i>Vercel</span><span class="stack-tag">n8n</span></div>
+        <div class="proj-footer">
+          <span style="font-family:var(--mono);font-size:10px;color:var(--muted2);font-style:italic" data-i18n="proj.private">Sistema interno · código privado</span>
+        </div>
+      </div>
+      <div class="proj-card-right">
+        <div class="proj-meta">
+          <div class="proj-meta-item"><span data-i18n="proj.status">Estado</span><span style="color:var(--green)" data-i18n="proj.inuse_dot">● En uso</span></div>
+          <div class="proj-meta-item"><span data-i18n="proj.sources">Fuentes</span><span>Naaloo · Geest · Obersat</span></div>
+          <div class="proj-meta-item"><span data-i18n="proj.access">Acceso</span><span data-i18n="proj.access_val">Interno · privado</span></div>
+        </div>
+        <div class="proj-links"><a href="./centro-de-datos-case-study.html" class="proj-link proj-link-primary" data-i18n="proj.casestudy">Ver caso de estudio →</a></div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 — VECTOR (incluye Prisma) -->
+    <div class="proj-card featured reveal">
+      <div class="proj-card-left">
+        <div class="proj-top">
+          <div><div class="proj-title">VECTOR</div><div class="proj-subtitle" data-i18n="proj.vector_sub">Ecosistemas con IA</div></div>
+        </div>
+        <p class="proj-desc" data-i18n-html="proj.vector_desc">Mi marca de ecosistemas con IA. Reúne los sistemas de gestión que construyo para negocios, y dentro de ella vive Prisma.</p>
+        <div style="background:rgba(255,45,130,0.05);border:0.5px solid rgba(255,45,130,0.18);border-radius:14px;padding:1rem">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent3);margin-bottom:0.75rem" data-i18n="proj.inside_vector">Dentro de VECTOR</div>
+          <div class="proj-top">
+            <div><div class="proj-title" style="font-size:1.15rem">Prisma</div><div class="proj-subtitle" data-i18n="proj.prisma_sub">Gestión de turnos para estética</div></div>
+            <div class="proj-badges"><span class="mbadge mbadge-green"><span class="active-dot" style="display:inline-block;margin-right:5px"></span><span data-i18n="proj.inuse">En uso</span></span></div>
+          </div>
+          <p class="proj-desc" style="margin:0.75rem 0" data-i18n-html="proj.prisma_desc">Sistema de gestión para un negocio de estética: agenda con varias profesionales, clientes, caja, stock, recordatorios y reserva online pública para que las clientas saquen turno solas.</p>
+          <div class="proj-stack" style="margin-bottom:0.75rem"><span class="stack-tag"><i class="devicon-react-original di"></i>React</span><span class="stack-tag">Supabase</span><span class="stack-tag"><i class="devicon-postgresql-plain di"></i>PostgreSQL</span></div>
+          <span style="font-family:var(--mono);font-size:10px;color:var(--muted2);font-style:italic" data-i18n="proj.private_client">Proyecto para cliente · código privado</span>
+        </div>
+      </div>
+      <div class="proj-card-right">
+        <div class="proj-meta">
+          <div class="proj-meta-item"><span data-i18n="proj.brand">Marca</span><span data-i18n="proj.vector_sub">Ecosistemas con IA</span></div>
+          <div class="proj-meta-item"><span data-i18n="proj.includes">Incluye</span><span>Prisma</span></div>
+          <div class="proj-meta-item"><span data-i18n="proj.status">Estado</span><span style="color:var(--green)" data-i18n="proj.inuse_dot">● En uso</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 — MEDIGEST -->
     <div class="proj-card featured reveal">
       <div class="proj-card-left">
         <div class="proj-top">
@@ -438,7 +590,6 @@ footer{display:block;padding:0 3rem 2rem}
             <div class="proj-subtitle">HIS · Hospital Information System</div>
           </div>
           <div class="proj-badges">
-            <span class="mbadge mbadge-purple" data-i18n="proj.star">⭐ Proyecto estrella</span>
             <span class="mbadge mbadge-green"><span class="active-dot" style="display:inline-block;margin-right:5px"></span><span data-i18n="proj.active">Activo</span></span>
           </div>
         </div>
@@ -474,36 +625,8 @@ footer{display:block;padding:0 3rem 2rem}
           <div class="proj-meta-item"><span>Stack</span><span>Full-stack · HIS</span></div>
         </div>
         <div class="proj-links">
-          <a href="./case-studies/medigest-case-study.html" class="proj-link proj-link-primary" data-i18n="proj.casestudy">Ver caso de estudio →</a>
+          <a href="./medigest-case-study.html" class="proj-link proj-link-primary" data-i18n="proj.casestudy">Ver caso de estudio →</a>
         </div>
-      </div>
-    </div>
-
-    <!-- PROJECT 2 — DOCUFLOW -->
-    <div class="proj-card reveal" style="opacity:0.6;border-style:dashed">
-      <div class="proj-top">
-        <div><div class="proj-title">DocuFlow</div><div class="proj-subtitle" data-i18n="proj.docuflow_sub">Gestión documental automatizada</div></div>
-        <div class="proj-badges"><span class="mbadge mbadge-warm" data-i18n="proj.soon">En construcción</span></div>
-      </div>
-      <p class="proj-desc" data-i18n-html="proj.docuflow_desc">Sistema de gestión y flujo de documentos con automatización de procesos, control de versiones y trazabilidad de documentos críticos. Arquitectura definida, desarrollo activo.</p>
-      <div class="proj-stack"><span class="stack-tag"><i class="devicon-nodejs-plain di"></i>Node.js</span><span class="stack-tag"><i class="devicon-javascript-plain di"></i>JavaScript</span><span class="stack-tag"><i class="devicon-postgresql-plain di"></i>PostgreSQL</span><span class="stack-tag"><i class="devicon-fastapi-plain di"></i>REST API</span></div>
-      <div class="proj-footer">
-        <span style="font-family:var(--mono);font-size:10px;color:var(--muted2);font-style:italic" data-i18n="proj.soon_eta">Disponible Q3 2026 · seguime en GitHub para el lanzamiento</span>
-        <a href="https://github.com/belenmm1" target="_blank" class="proj-link proj-link-outline" style="flex:0">GitHub →</a>
-      </div>
-    </div>
-
-    <!-- PROJECT 3 — JUNIOR SYSTEM -->
-    <div class="proj-card reveal" style="opacity:0.6;border-style:dashed">
-      <div class="proj-top">
-        <div><div class="proj-title">Junior System</div><div class="proj-subtitle" data-i18n="proj.junior_sub">Plataforma de gestión interna</div></div>
-        <div class="proj-badges"><span class="mbadge mbadge-warm" data-i18n="proj.soon">En construcción</span></div>
-      </div>
-      <p class="proj-desc" data-i18n-html="proj.junior_desc">Sistema interno de gestión orientado a equipos en crecimiento. Incluye administración de usuarios, control de accesos por rol y panel de operaciones con interfaz limpia y accesible.</p>
-      <div class="proj-stack"><span class="stack-tag"><i class="devicon-html5-plain di"></i>HTML</span><span class="stack-tag"><i class="devicon-css3-plain di"></i>CSS</span><span class="stack-tag"><i class="devicon-javascript-plain di"></i>JavaScript</span><span class="stack-tag"><i class="devicon-nodejs-plain di"></i>Node.js</span></div>
-      <div class="proj-footer">
-        <span style="font-family:var(--mono);font-size:10px;color:var(--muted2);font-style:italic" data-i18n="proj.soon_eta">Disponible Q3 2026 · seguime en GitHub para el lanzamiento</span>
-        <a href="https://github.com/belenmm1" target="_blank" class="proj-link proj-link-outline" style="flex:0">GitHub →</a>
       </div>
     </div>
 
@@ -516,8 +639,8 @@ footer{display:block;padding:0 3rem 2rem}
   <div class="work-title reveal">Work</div>
   <div class="exp-timeline">
     <div class="exp-item reveal">
-      <div class="exp-meta"><span class="exp-years">2024 — <span data-i18n="exp.present">presente</span></span><span class="exp-duration">1 <span data-i18n="exp.year">año</span> +</span></div>
-      <div><div class="exp-company">TDS Misiones</div><div class="exp-role">Data Management & Technical Support</div><ul class="exp-tasks"><li data-i18n="exp.tds1">Supervisión integral de datos entrantes/salientes para asegurar integridad corporativa</li><li data-i18n="exp.tds2">Control de versiones y backup de activos digitales y código fuente</li><li data-i18n="exp.tds3">Coordinación operativa y soporte administrativo para procesos de RRHH</li></ul></div>
+      <div class="exp-meta"><span class="exp-years">2025 — <span data-i18n="exp.present">presente</span></span><span class="exp-duration">1 <span data-i18n="exp.year">año</span> +</span></div>
+      <div><div class="exp-company">TDS Misiones</div><div class="exp-role">Software Developer & Data Management</div><ul class="exp-tasks"><li data-i18n="exp.tds_dev">Desarrollo de Centro de Datos, sistema interno de reportes de gestión con datos reales: frontend en React/TypeScript, API y PostgreSQL (Supabase), deploy en Vercel</li><li data-i18n="exp.tds_n8n">Automatización con n8n: flujos que integran Naaloo, Geest y Obersat (GPS) en una base de datos propia</li><li data-i18n="exp.tds1">Supervisión integral de datos entrantes/salientes para asegurar integridad corporativa</li><li data-i18n="exp.tds2">Control de versiones y backup de activos digitales y código fuente</li><li data-i18n="exp.tds3">Coordinación operativa y soporte administrativo para procesos de RRHH</li></ul></div>
     </div>
     <div class="exp-item reveal">
       <div class="exp-meta"><span class="exp-years">2020 — 2025</span><span class="exp-duration">5 <span data-i18n="exp.years">años</span></span></div>
@@ -549,6 +672,8 @@ footer{display:block;padding:0 3rem 2rem}
       <div class="skill-row"><div class="skill-header"><span class="skill-name">Python</span><span class="skill-level" data-i18n="skills.intermediate">Intermedio-alto</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="72%"></div></div></div>
       <div class="skill-row"><div class="skill-header"><span class="skill-name" data-i18n="skills.db">Bases de datos / SQL</span><span class="skill-level" data-i18n="skills.advanced">Avanzado</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80%"></div></div></div>
       <div class="skill-row"><div class="skill-header"><span class="skill-name" data-i18n="skills.data">Análisis de datos / Office</span><span class="skill-level" data-i18n="skills.expert">Experto</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="95%"></div></div></div>
+      <div class="skill-row"><div class="skill-header"><span class="skill-name">React / TypeScript</span><span class="skill-level" data-i18n="skills.mid">Intermedio</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="70%"></div></div></div>
+      <div class="skill-row"><div class="skill-header"><span class="skill-name" data-i18n="skills.auto">Automatización (n8n) / APIs</span><span class="skill-level" data-i18n="skills.mid">Intermedio</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="72%"></div></div></div>
       <div class="skill-row"><div class="skill-header"><span class="skill-name" data-i18n="skills.sec">Seguridad / Ciberseguridad</span><span class="skill-level" data-i18n="skills.mid">Intermedio</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="68%"></div></div></div>
       <div class="skill-row"><div class="skill-header"><span class="skill-name" data-i18n="skills.req">Ingeniería de requerimientos</span><span class="skill-level" data-i18n="skills.advanced">Avanzado</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="82%"></div></div></div>
     </div>
@@ -640,19 +765,20 @@ const i18n={
     'proj.tag':'Proyectos','proj.star':'⭐ Proyecto estrella','proj.active':'Activo','proj.new':'Nuevo','proj.indev':'En desarrollo activo',
     'proj.repo':'Repo','proj.demo':'Demo','proj.live':'● Live en Railway','proj.demolink':'🚀 Demo live →','proj.be_meta':'+3,500 líneas · 8 módulos',
     'proj.frontend':'Frontend · SPA','proj.backend':'Backend · REST API','proj.casestudy':'Ver caso de estudio →',
-    'proj.soon':'En construcción','proj.soon_eta':'Disponible Q3 2026 · seguime en GitHub para el lanzamiento',
+    'proj.inuse':'En uso','proj.cdd_b1':'Tres fuentes (Naaloo, Geest, Obersat) en un solo centro de control, con mapa de flota en vivo','proj.cdd_b2':'TDS IA: señales con reglas explícitas; la IA solo redacta y el servidor valida cada cifra','proj.cdd_b3':'Permisos aplicados en el servidor, auditoría completa y 17 migraciones SQL versionadas','proj.cdd_b4':'Nunca inventa datos: sin fuente, muestra «sin datos»','proj.inuse_dot':'● En uso','proj.status':'Estado','proj.sources':'Fuentes','proj.access':'Acceso','proj.access_val':'Interno · privado','proj.brand':'Marca','proj.includes':'Incluye','proj.inside_vector':'Dentro de VECTOR','proj.vector_sub':'Ecosistemas con IA','proj.flow':'// flujo de datos · Centro de Datos','proj.private':'Sistema interno · código privado','proj.private_client':'Proyecto para cliente · código privado',
     'proj.medigest_desc':'Sistema de gestión hospitalaria completo construido desde cero — como meta real para volcar todo lo que estaba aprendiendo. El resultado fue bastante más grande de lo que imaginé cuando escribí el primer commit.',
-    'proj.docuflow_sub':'Gestión documental automatizada',
-    'proj.docuflow_desc':'Sistema de gestión y flujo de documentos con automatización de procesos, control de versiones y trazabilidad de documentos críticos. Arquitectura definida, desarrollo activo.',
-    'proj.junior_sub':'Plataforma de gestión interna',
-    'proj.junior_desc':'Sistema interno de gestión orientado a equipos en crecimiento. Incluye administración de usuarios, control de accesos por rol y panel de operaciones con interfaz limpia y accesible.',
+    'proj.tds_sub':'Reportes de gestión · sistema interno',
+    'proj.tds_desc':'Sistema interno que centraliza datos operativos de varias fuentes (Naaloo, Geest, Obersat) en una base PostgreSQL propia, alimentada por flujos de n8n. Incluye perfiles de acceso por rol (administrador / técnico) y un centro de control con datos reales.',
+    'proj.vector_desc':'Mi marca de ecosistemas con IA. Reúne los sistemas de gestión que construyo para negocios, y dentro de ella vive Prisma.',
+    'proj.prisma_sub':'Gestión de turnos para estética',
+    'proj.prisma_desc':'Sistema de gestión para un negocio de estética: agenda con varias profesionales, clientes, caja, stock, recordatorios y reserva online pública para que las clientas saquen turno solas.',
     'exp.tag':'Trayectoria','exp.present':'presente','exp.year':'año','exp.years':'años',
-    'exp.tds1':'Supervisión integral de datos entrantes/salientes para asegurar integridad corporativa','exp.tds2':'Control de versiones y backup de activos digitales y código fuente','exp.tds3':'Coordinación operativa y soporte administrativo para procesos de RRHH',
+    'exp.tds_dev':'Desarrollo de Centro de Datos, sistema interno de reportes de gestión con datos reales: frontend en React/TypeScript, API y PostgreSQL (Supabase), deploy en Vercel','exp.tds_n8n':'Automatización con n8n: flujos que integran Naaloo, Geest y Obersat (GPS) en una base de datos propia','exp.tds1':'Supervisión integral de datos entrantes/salientes para asegurar integridad corporativa','exp.tds2':'Control de versiones y backup de activos digitales y código fuente','exp.tds3':'Coordinación operativa y soporte administrativo para procesos de RRHH',
     'exp.shine1':'Auditoría de flujos de datos financieros y operativos','exp.shine2':'Implementación de políticas de backup para registros críticos','exp.shine3':'Coordinación de workflows y resolución de requerimientos técnicos internos',
     'edu.tag':'Formación','edu.title':'Educación','edu.ongoing':'En curso','edu.done':'Completado','edu.track':'Track técnico','edu.advanced':'Nivel avanzado',
     'edu.degree1':'Analista de Sistemas','edu.degree2':'Programación en Python','edu.degree4':'Profesorado de Inglés',
     'skills.tag':'Habilidades','skills.advanced':'Avanzado','skills.intermediate':'Intermedio-alto','skills.mid':'Intermedio','skills.expert':'Experto',
-    'skills.db':'Bases de datos / SQL','skills.data':'Análisis de datos / Office','skills.sec':'Seguridad / Ciberseguridad','skills.req':'Ingeniería de requerimientos',
+    'skills.db':'Bases de datos / SQL','skills.data':'Análisis de datos / Office','skills.sec':'Seguridad / Ciberseguridad','skills.auto':'Automatización (n8n) / APIs','skills.req':'Ingeniería de requerimientos',
     'skills.langs':'Idiomas','skills.spanish':'Español','skills.english':'Inglés','skills.native':'Nativo','skills.bilingual':'Avanzado / Bilingüe',
     'contact.tag':'Hablemos','contact.title':'Contacto','contact.phone':'Teléfono','contact.location':'Ubicación','contact.avail_label':'Disponibilidad','contact.avail':'Abierta a oportunidades',
     'contact.name':'Nombre','contact.name_ph':'Tu nombre','contact.msg':'Mensaje','contact.msg_ph':'Contame tu proyecto...','contact.send':'Enviar mensaje →','contact.sent':'✓ Mensaje enviado. Te respondo pronto.',
@@ -668,19 +794,20 @@ const i18n={
     'proj.tag':'Projects','proj.star':'⭐ Star project','proj.active':'Active','proj.new':'New','proj.indev':'In active development',
     'proj.repo':'Repo','proj.demo':'Demo','proj.live':'● Live on Railway','proj.demolink':'🚀 Live demo →','proj.be_meta':'+3,500 lines · 8 modules',
     'proj.frontend':'Frontend · SPA','proj.backend':'Backend · REST API','proj.casestudy':'View case study →',
-    'proj.soon':'In progress','proj.soon_eta':'Available Q3 2026 · follow me on GitHub for the launch',
+    'proj.inuse':'In use','proj.cdd_b1':'Three sources (Naaloo, Geest, Obersat) in one control center, with a live fleet map','proj.cdd_b2':'TDS IA: signals from explicit rules; the AI only writes them up and the server validates every figure','proj.cdd_b3':'Server-side permissions, full audit trail and 17 versioned SQL migrations','proj.cdd_b4':'Never invents data: with no source, it shows “no data”','proj.inuse_dot':'● In use','proj.status':'Status','proj.sources':'Sources','proj.access':'Access','proj.access_val':'Internal · private','proj.brand':'Brand','proj.includes':'Includes','proj.inside_vector':'Inside VECTOR','proj.vector_sub':'AI-powered ecosystems','proj.flow':'// data flow · Centro de Datos','proj.private':'Internal system · private code','proj.private_client':'Client project · private code',
     'proj.medigest_desc':'Complete hospital management system built from scratch — as a real goal to apply everything I was learning. The result ended up being much bigger than I imagined when I wrote the first commit.',
-    'proj.docuflow_sub':'Automated document management',
-    'proj.docuflow_desc':'Document management and workflow system with process automation, version control and traceability of critical documents. Architecture defined, active development.',
-    'proj.junior_sub':'Internal management platform',
-    'proj.junior_desc':'Internal management system for growing teams. Includes user administration, role-based access control and an operations dashboard with a clean, accessible interface.',
+    'proj.tds_sub':'Management reporting · internal system',
+    'proj.tds_desc':'Internal system that centralizes operational data from several sources (Naaloo, Geest, Obersat) into its own PostgreSQL database, fed by n8n workflows. Includes role-based access profiles (admin / technician) and a control center running on real data.',
+    'proj.vector_desc':'My brand of AI-powered ecosystems. It brings together the management systems I build for businesses, and Prisma lives inside it.',
+    'proj.prisma_sub':'Appointment management for a beauty studio',
+    'proj.prisma_desc':'Management system for a beauty business: multi-professional calendar, clients, cash register, stock, reminders and a public online booking page so clients can book on their own.',
     'exp.tag':'Experience','exp.present':'present','exp.year':'year','exp.years':'years',
-    'exp.tds1':'Comprehensive supervision of inbound/outbound data to ensure corporate integrity','exp.tds2':'Version control and backup of digital assets and source code','exp.tds3':'Operational coordination and administrative support for HR processes',
+    'exp.tds_dev':'Development of Centro de Datos, an internal management reporting system on real data: React/TypeScript frontend, API and PostgreSQL (Supabase), deployed on Vercel','exp.tds_n8n':'Automation with n8n: workflows integrating Naaloo, Geest and Obersat (GPS) into a dedicated database','exp.tds1':'Comprehensive supervision of inbound/outbound data to ensure corporate integrity','exp.tds2':'Version control and backup of digital assets and source code','exp.tds3':'Operational coordination and administrative support for HR processes',
     'exp.shine1':'Audit of financial and operational data flows','exp.shine2':'Implementation of backup policies for critical records','exp.shine3':'Workflow coordination and resolution of internal technical requirements',
     'edu.tag':'Education','edu.title':'Education','edu.ongoing':'In progress','edu.done':'Completed','edu.track':'Technical track','edu.advanced':'Advanced level',
     'edu.degree1':'Systems Analyst','edu.degree2':'Python Programming','edu.degree4':'English Teaching Degree',
     'skills.tag':'Skills','skills.advanced':'Advanced','skills.intermediate':'Upper-intermediate','skills.mid':'Intermediate','skills.expert':'Expert',
-    'skills.db':'Databases / SQL','skills.data':'Data Analysis / Office','skills.sec':'Security / Cybersecurity','skills.req':'Requirements Engineering',
+    'skills.db':'Databases / SQL','skills.data':'Data Analysis / Office','skills.sec':'Security / Cybersecurity','skills.auto':'Automation (n8n) / APIs','skills.req':'Requirements Engineering',
     'skills.langs':'Languages','skills.spanish':'Spanish','skills.english':'English','skills.native':'Native','skills.bilingual':'Advanced / Bilingual',
     'contact.tag':"Let's talk",'contact.title':'Contact','contact.phone':'Phone','contact.location':'Location','contact.avail_label':'Availability','contact.avail':'Open to opportunities',
     'contact.name':'Name','contact.name_ph':'Your name','contact.msg':'Message','contact.msg_ph':'Tell me about your project...','contact.send':'Send message →','contact.sent':"✓ Message sent. I'll get back to you soon.",
@@ -691,6 +818,7 @@ const i18n={
 
 let currentLang='es';
 function setGlobalLang(lang){
+  if(window.fxScan)fxScan();
   currentLang=lang;
   document.getElementById('btn-es').classList.toggle('active',lang==='es');
   document.getElementById('btn-en').classList.toggle('active',lang==='en');
@@ -957,6 +1085,75 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeEgg()});
   },{passive:true});
 })();
 
+(function(){
+  var img=document.getElementById('about-photo-el');
+  if(!img)return;
+  document.addEventListener('mousemove',function(e){
+    var rect=img.getBoundingClientRect();
+    var cx=rect.left+rect.width/2;
+    var cy=rect.top+rect.height/2;
+    var dx=(e.clientX-cx)/window.innerWidth;
+    var dy=(e.clientY-cy)/window.innerHeight;
+    img.style.transform='translate('+dx*10+'px,'+dy*8+'px)';
+  });
+})();
+
+</script>
+
+<script>
+/* FX LAYER — carga después del resto; respeta prefers-reduced-motion y baja la carga en móviles */
+(function(){
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,FINE=matchMedia('(pointer:fine)').matches,root=document.documentElement,hero=document.getElementById('hero');
+const mk=(t,id,cls,html)=>{const e=document.createElement(t);if(id)e.id=id;if(cls)e.className=cls;if(html)e.innerHTML=html;e.setAttribute('aria-hidden','true');return e};
+const net=mk('canvas','fx-net'),mesh=document.getElementById('mesh-canvas');
+if(mesh)mesh.after(net,mk('div','fx-spot'));else document.body.prepend(net,mk('div','fx-spot'));
+document.body.append(mk('div','fx-progress'),mk('div','fx-scan'),mk('div','fx-sec','// 01 · <b>HERO</b>'));
+if(hero)hero.append(mk('div',null,'fx-cube-wrap','<div class="fx-cube"><i></i><i></i><i></i><i></i><i></i><i></i></div>'),
+ mk('div',null,'fx-hud','<div class="ok"><b>SYS</b> online</div><div class="hide-sm">27.49°S · 55.12°W</div><div class="hide-sm">cursor <b id="fx-xy">0000·0000</b></div><div class="hide-sm" id="fx-clock">--:--:--</div>'));
+/* red de nodos interactiva (menos nodos en móviles / equipos modestos) */
+const x=net.getContext('2d'),lite=innerWidth<768||(navigator.hardwareConcurrency||4)<=4,N=lite?26:62,D=lite?105:135;
+let W,H,pts=[],mx=-999,my=-999,raf=0;
+function size(){const d=Math.min(devicePixelRatio||1,1.5);W=innerWidth;H=innerHeight;net.width=W*d;net.height=H*d;x.setTransform(d,0,0,d,0,0)}
+function seed(){pts=Array.from({length:N},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.5+.5}))}
+function line(a,b,c,al){x.strokeStyle='rgba('+c+','+al+')';x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}
+function frame(){x.clearRect(0,0,W,H);const m={x:mx,y:my};
+ for(let i=0;i<N;i++){const a=pts[i];a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
+  x.fillStyle='rgba(255,128,192,.85)';x.beginPath();x.arc(a.x,a.y,a.r,0,6.283);x.fill();
+  for(let j=i+1;j<N;j++){const b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=dx*dx+dy*dy;if(d<D*D)line(a,b,'255,45,130',((1-Math.sqrt(d)/D)*.35).toFixed(3))}
+  const dx=a.x-mx,dy=a.y-my,d=dx*dx+dy*dy;if(d<22500)line(a,m,'255,160,210',((1-Math.sqrt(d)/150)*.55).toFixed(3))}
+ if(!RM)raf=requestAnimationFrame(frame)}
+size();seed();frame();
+document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(raf);if(!document.hidden&&!RM)raf=requestAnimationFrame(frame)});
+addEventListener('pagehide',()=>cancelAnimationFrame(raf));
+let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{size();seed();if(RM)frame()},200)});
+/* puntero: spotlight, parallax y coordenadas HUD */
+const xy=document.getElementById('fx-xy');let tk=0;
+if(!RM)addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;if(tk)return;tk=1;requestAnimationFrame(()=>{tk=0;const s=root.style;s.setProperty('--mx',mx+'px');s.setProperty('--my',my+'px');s.setProperty('--px',(mx/innerWidth-.5)*2);s.setProperty('--py',(my/innerHeight-.5)*2);if(xy)xy.textContent=String(mx|0).padStart(4,'0')+'·'+String(my|0).padStart(4,'0')})},{passive:true});
+/* scroll: barra de progreso, parallax y sección activa */
+const prog=document.getElementById('fx-progress');let st=0;
+addEventListener('scroll',()=>{if(st)return;st=1;requestAnimationFrame(()=>{st=0;const m=root.scrollHeight-innerHeight;prog.style.transform='scaleX('+(m>0?scrollY/m:0)+')';root.style.setProperty('--sy',scrollY)})},{passive:true});
+const sec=document.getElementById('fx-sec'),ids=['hero','about','projects','experience','education','skills','contact'];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)sec.innerHTML='// 0'+(ids.indexOf(e.target.id)+1)+' · <b>'+e.target.id.toUpperCase()+'</b>'}),{rootMargin:'-45% 0px -50% 0px'});
+ids.forEach(id=>{const e=document.getElementById(id);if(e)io.observe(e)});
+/* reloj HUD (se pausa con la pestaña oculta) */
+const clk=document.getElementById('fx-clock');
+if(clk){const t=()=>{if(!document.hidden)clk.textContent=new Date().toLocaleTimeString('es-AR',{timeZone:'America/Argentina/Buenos_Aires',hour12:false})+' ART'};t();setInterval(t,1000)}
+/* tarjetas: tilt + reflejo; botones magnéticos (solo mouse y sin reduced-motion) */
+if(FINE&&!RM){
+ document.querySelectorAll('.proj-card').forEach(c=>{c.append(mk('div',null,'glare'));
+  c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;c.style.transition='transform .12s,border-color .3s,box-shadow .3s';c.style.transform='perspective(1000px) rotateX('+(.5-py)*4+'deg) rotateY('+(px-.5)*5+'deg) translateY(-5px)';c.style.setProperty('--gx',px*100+'%');c.style.setProperty('--gy',py*100+'%')});
+  c.addEventListener('pointerleave',()=>{c.style.transition='';c.style.transform=''})});
+ document.querySelectorAll('.proj-link,.btn-outline,.btn-primary,.form-submit').forEach(b=>{
+  b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform='translate('+(e.clientX-r.left-r.width/2)*.18+'px,'+(e.clientY-r.top-r.height/2)*.28+'px)'});
+  b.addEventListener('pointerleave',()=>{b.style.transform=''})})}
+/* diagrama de flujo: paquetes de datos viajando por las líneas */
+document.querySelectorAll('.fx-flow svg').forEach(svg=>{const ns='http://www.w3.org/2000/svg';
+ svg.querySelectorAll('.ln').forEach((p,i)=>{const c=document.createElementNS(ns,'circle'),a=document.createElementNS(ns,'animateMotion');c.setAttribute('r',3);c.setAttribute('class','pk');
+  a.setAttribute('dur','2.4s');a.setAttribute('begin',(i*.4)+'s');a.setAttribute('repeatCount','indefinite');a.setAttribute('path',p.getAttribute('d'));c.append(a);svg.append(c)});
+ if(RM&&svg.pauseAnimations)svg.pauseAnimations()});
+/* transición al cambiar de idioma: barrido de escaneo + texto que se re-enfoca */
+window.fxScan=function(){document.body.classList.add('lang-flip');setTimeout(()=>document.body.classList.remove('lang-flip'),600);if(RM)return;const s=document.getElementById('fx-scan');s.classList.remove('go');void s.offsetWidth;s.classList.add('go')};
+})();
 </script>
 </body>
 </html>
