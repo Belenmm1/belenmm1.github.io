@@ -30,7 +30,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:h
 #alfred-wave{position:fixed;bottom:0;left:0;right:0;height:340px;z-index:0;pointer-events:none;background:radial-gradient(ellipse 120% 100% at 50% 130%,rgba(255,60,130,0.70) 0%,rgba(200,10,80,0.50) 30%,transparent 65%),radial-gradient(ellipse 80% 60% at 20% 120%,rgba(255,100,160,0.35) 0%,transparent 50%),radial-gradient(ellipse 80% 60% at 80% 120%,rgba(220,30,100,0.30) 0%,transparent 50%);animation:wave-breathe 6s ease-in-out infinite}
 @keyframes wave-breathe{0%,100%{transform:scaleY(1) translateY(0);opacity:0.85}50%{transform:scaleY(1.06) translateY(-8px);opacity:1}}
 nav,section,footer,#hero{position:relative;z-index:1}
-body.light{--bg:#faf0f6;--bg2:#f3e8f0;--bg3:#ece0ea;--surface:rgba(255,255,255,0.65);--surface2:#fdf4f8;--border:rgba(200,80,140,0.18);--border2:rgba(200,80,140,0.28);--text:#180614;--muted:#7a3a60;--muted2:#b080a0;--glass-bg:rgba(255,255,255,0.50);--glass-border:rgba(255,80,160,0.22)}
+body.light{--bg:#faf0f6;--bg2:#f3e8f0;--bg3:#ece0ea;--surface:rgba(255,255,255,0.65);--surface2:#fdf4f8;--border:rgba(200,80,140,0.18);--border2:rgba(200,80,140,0.28);--text:#180614;--muted:#7a3a60;--muted2:#8a5578;--glass-bg:rgba(255,255,255,0.50);--glass-border:rgba(255,80,160,0.22)}
 body.light #alfred-scene{background:radial-gradient(ellipse 80% 60% at 50% 110%,rgba(255,45,130,0.20) 0%,rgba(180,0,80,0.10) 40%,transparent 70%),linear-gradient(180deg,#faf0f6 0%,#f3e6f0 50%,#ead0e4 100%)}
 body.light #alfred-wave{opacity:0.25}
 a{color:inherit;text-decoration:none}
@@ -316,6 +316,65 @@ footer{display:block;padding:0 3rem 2rem}
 .about-photo-wrap:hover .about-photo{transform:scale(1.04)}
 
 .proj-bullets{list-style:none;display:grid;gap:.45rem;margin:.25rem 0}.proj-bullets li{font-size:.9rem;color:var(--muted);line-height:1.55}.proj-bullets li::before{content:"▸ ";color:var(--accent)}
+
+#vector{position:relative}
+.pr-wrap{display:grid;grid-template-columns:minmax(260px,1fr) 1.2fr;gap:3rem;align-items:center;margin-top:2rem}
+.pr-word{font-family:var(--sans);font-weight:800;font-size:clamp(3rem,9vw,6.5rem);letter-spacing:-.04em;line-height:1;background:linear-gradient(90deg,#a855f7,#d946ef 35%,#ff2d82 65%,#ff9ccb);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.pr-line{color:var(--muted);max-width:520px;margin:1rem 0}.pr-rel{border-left:2px solid var(--accent);padding:.5rem 1rem;color:var(--muted);font-size:.9rem;margin-top:1rem}
+.pr-svg{width:100%;height:auto;filter:drop-shadow(0 0 22px rgba(168,85,247,.35))}
+.pr-svg .pb{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-dasharray:6 8;animation:fx-dash 1.4s linear infinite;opacity:.85;transition:opacity .25s,stroke-width .25s}
+.pr-svg.hl .pb:not(.on):not(.pin){opacity:.12}.pr-svg .pb.on{stroke-width:4;opacity:1}
+.pr-legend{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.pr-chip{font:11px var(--mono);padding:5px 14px;border-radius:20px;border:.5px solid var(--border2);color:var(--muted);background:transparent;cursor:none}
+.pr-chip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;background:var(--c);box-shadow:0 0 8px var(--c)}
+.pr-chip:hover,.pr-chip:focus-visible{color:var(--text);border-color:var(--c)}
+.pr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:3rem}
+.pr-card{border:.5px solid var(--border);border-radius:16px;padding:1.25rem;background:var(--glass-bg);backdrop-filter:blur(14px)}
+.pr-card h3{font:11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}.pr-card p{color:var(--muted);font-size:.9rem}
+@media(max-width:860px){.pr-wrap{grid-template-columns:1fr;gap:1.5rem}}
+
+.pr-svg{filter:drop-shadow(0 0 20px rgba(255,45,130,.28))}
+.pr-svg .pbr path{fill:none;stroke:var(--border2);stroke-width:1.2}.pr-svg .pl{font:8px var(--mono);letter-spacing:.14em;fill:var(--muted2)}
+.pr-svg .prad circle{fill:none;stroke:rgba(255,45,130,.2);stroke-width:.8}.pr-svg .prad .ptick{stroke-dasharray:1.2 5;stroke:rgba(255,128,192,.55)}
+.pr-svg .psweep{transform-origin:230px 150px;animation:pr-spin 7s linear infinite}
+.pr-svg .pring ellipse{fill:none;stroke:#a855f7;stroke-opacity:.55;stroke-width:1;stroke-dasharray:3 5}.pr-svg .pdot{fill:#ff80c0;filter:drop-shadow(0 0 5px #ff2d82)}
+.pr-svg .r1{transform-origin:230px 150px;transform:rotate(22deg);animation:pr-spin 16s linear infinite}.pr-svg .r2{transform-origin:230px 150px;transform:rotate(-38deg);animation:pr-spin 24s linear infinite reverse}
+@keyframes pr-spin{to{transform:rotate(360deg)}}
+.pr-svg .r1{animation-name:pr-spin1}.pr-svg .r2{animation-name:pr-spin2}
+@keyframes pr-spin1{from{transform:rotate(22deg)}to{transform:rotate(382deg)}}@keyframes pr-spin2{from{transform:rotate(-38deg)}to{transform:rotate(-398deg)}}
+.pr-svg .pi{transform-box:fill-box;animation:pr-fl 5s ease-in-out infinite}@keyframes pr-fl{25%{transform:translate(3px,-4px)}60%{transform:translate(-3px,3px)}}
+.pr-svg .pn{fill:rgba(255,45,130,.05);stroke:#ff80c0;stroke-opacity:.6;stroke-width:1;stroke-dasharray:2 3}.pr-svg .pd{fill:#ff80c0;animation:fx-blink 1.6s steps(2) infinite}
+.pr-svg .pin2{stroke:#ff80c0;stroke-opacity:.55;stroke-width:1.1;stroke-dasharray:2 5}
+.pr-svg .pcore{animation:pr-core 4s ease-in-out infinite}@keyframes pr-core{50%{filter:drop-shadow(0 0 16px rgba(255,45,130,.7))}}
+.pr-svg .pinner{fill:rgba(168,85,247,.18);stroke:#ff80c0;stroke-width:.8;animation:pr-pulse 3s ease-in-out infinite;transform-origin:230px 150px}@keyframes pr-pulse{50%{transform:scale(1.18);fill:rgba(255,45,130,.3)}}
+.pr-svg .pscanl{animation:pr-scan 3.2s ease-in-out infinite}@keyframes pr-scan{0%{transform:translateY(0)}100%{transform:translateY(88px)}}
+.pr-svg .pv circle{fill:#fff;filter:drop-shadow(0 0 4px #ff2d82)}
+.pr-svg .pmono{font:800 30px var(--sans);text-anchor:middle;fill:rgba(255,45,130,.14);stroke:#fff;stroke-width:1.1}
+.pr-svg .po polygon{fill:rgba(10,4,14,.55);stroke:var(--c);stroke-opacity:.55;stroke-width:1;transition:fill .25s,stroke-opacity .25s}
+.pr-svg .po text{font:10px var(--mono);fill:var(--text);letter-spacing:.04em}.pr-svg .po .pidx{font-size:8px;fill:var(--c);letter-spacing:.1em}
+.pr-svg .pst{fill:var(--c);animation:fx-blink 2s ease-in-out infinite}
+.pr-svg .po{cursor:none;outline:none}.pr-svg .po:hover polygon,.pr-svg .po:focus-visible polygon{fill:rgba(255,45,130,.16);stroke-opacity:1;filter:drop-shadow(0 0 8px var(--c))}
+.pr-cap{font:11px var(--mono);letter-spacing:.1em;color:var(--muted2);text-align:center;margin-top:.5rem;text-transform:uppercase}
+
+/* ===== MODO CLARO: los fondos oscuros fijos de cada sección no tenían versión clara ===== */
+body.light #about{background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(250,234,243,.6))}
+body.light #projects{background:linear-gradient(180deg,rgba(252,238,246,.65),rgba(248,226,239,.7))}
+body.light #experience{background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(250,232,242,.6))}
+body.light #education{background:linear-gradient(180deg,rgba(252,238,246,.65),rgba(248,224,238,.7))}
+body.light #skills{background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(250,230,241,.6))}
+body.light #contact{background:linear-gradient(180deg,rgba(252,236,245,.65),rgba(246,220,236,.75))}
+body.light footer{background:rgba(255,255,255,.7)}
+body.light .fx-hud{background:rgba(255,255,255,.7);border-color:var(--border2);color:var(--muted)}
+body.light .fx-flow .nd{fill:rgba(255,45,130,.08)}
+body.light .pr-svg .po polygon{fill:rgba(255,255,255,.85)}
+body.light .pr-svg .pl{fill:var(--muted)}body.light .pr-cap{color:var(--muted)}
+body.light .pr-svg .pmono{fill:rgba(255,45,130,.16);stroke:#c2185b}
+body.light .pr-svg .pv circle{fill:#ff2d82;filter:none}
+body.light .pr-svg .pn{stroke:#c2185b;stroke-opacity:.7}body.light .pr-svg .pd{fill:#c2185b}
+body.light .pr-svg .pin2{stroke:#c2185b;stroke-opacity:.55}
+body.light .pr-svg .pring ellipse{stroke:#7c3aed;stroke-opacity:.7}
+body.light .pr-svg .pidx{fill:#c2185b}
+body.light .pr-word{filter:saturate(1.15) brightness(.92)}
 /* ===== FX LAYER: capas visuales (red de nodos, spotlight, HUD, cubo 3D, tarjetas reactivas) ===== */
 #fx-net,#fx-spot{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
 #fx-net{opacity:.5}body.light #fx-net{opacity:.22}
@@ -403,6 +462,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <nav id="navbar">
   <div class="nav-logo">mbm<span>.</span>dev</div>
   <div class="nav-links">
+    <a href="#vector">VECTOR</a>
     <a href="#about" data-i18n="nav.about">Sobre mí</a>
     <a href="#projects" data-i18n="nav.projects">Proyectos</a>
     <a href="#experience" data-i18n="nav.experience">Experiencia</a>
@@ -479,13 +539,56 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <div class="section-sep"></div>
 
 <!-- ABOUT -->
+<section id="vector">
+  <div class="section-tag reveal" data-i18n="pr.tag">Marca tecnológica</div>
+  <div class="pr-wrap">
+    <div class="reveal">
+      <svg class="pr-svg" id="pr-svg" viewBox="0 0 460 300" role="img" aria-label="Símbolo de VECTOR: sistemas e información dispersa convergen en un núcleo holográfico y salen como cinco capas de solución: software, datos, integración, automatización e IA">
+        <defs>
+          <linearGradient id="pw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9ccb"/><stop offset=".55" stop-color="#ff2d82"/><stop offset="1" stop-color="#a855f7"/></linearGradient>
+          <linearGradient id="psw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff2d82" stop-opacity="0"/><stop offset="1" stop-color="#ff80c0" stop-opacity=".5"/></linearGradient>
+          <linearGradient id="pscan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff80c0" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#ff80c0" stop-opacity="0"/></linearGradient>
+          <radialGradient id="pf"><stop offset=".35" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
+          <pattern id="pgrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="rgba(255,45,130,.16)" stroke-width=".6"/></pattern>
+          <mask id="pm"><rect width="460" height="300" fill="url(#pf)"/></mask>
+          <clipPath id="pcl"><polygon points="230,104 270,127 270,173 230,196 190,173 190,127"/></clipPath>
+        </defs>
+        <rect width="460" height="300" fill="url(#pgrid)" mask="url(#pm)"/>
+        <g class="pbr"><path d="M6 22V6H22M438 6H454V22M454 278V294H438M22 294H6V278"/><text x="30" y="16" class="pl">VECTOR//CORE</text><text x="30" y="291" class="pl">IN 04</text><text x="404" y="291" class="pl" style="text-anchor:end">OUT 05</text></g>
+        <g class="prad"><circle cx="230" cy="150" r="104"/><circle cx="230" cy="150" r="76"/><circle cx="230" cy="150" r="62" class="ptick"/><path class="psweep" d="M230 150 L230 46 A104 104 0 0 1 304 77 Z" fill="url(#psw)"/></g>
+        <g class="pring r1"><ellipse cx="230" cy="150" rx="84" ry="26"/><circle cx="314" cy="150" r="3.2" class="pdot"/></g>
+        <g class="pring r2"><ellipse cx="230" cy="150" rx="92" ry="30"/><circle cx="138" cy="150" r="2.6" class="pdot"/></g>
+        <g class="pi" style="animation-delay:0.0s"><path class="pb pin2" d="M52 48 C 110 48 130 150 190 150"/><polygon class="pn" points="40,35 52,42 52,54 40,61 28,54 28,42"/><circle cx="40" cy="48" r="2.6" class="pd"/><text x="40" y="73" class="pl">SRC_01</text></g><g class="pi" style="animation-delay:0.7s"><path class="pb pin2" d="M96 112 C 154 112 130 150 190 150"/><polygon class="pn" points="84,99 96,106 96,118 84,125 72,118 72,106"/><circle cx="84" cy="112" r="2.6" class="pd"/><text x="84" y="137" class="pl">SRC_02</text></g><g class="pi" style="animation-delay:1.4s"><path class="pb pin2" d="M46 188 C 104 188 130 150 190 150"/><polygon class="pn" points="34,175 46,182 46,194 34,201 22,194 22,182"/><circle cx="34" cy="188" r="2.6" class="pd"/><text x="34" y="213" class="pl">SRC_03</text></g><g class="pi" style="animation-delay:2.0999999999999996s"><path class="pb pin2" d="M104 252 C 162 252 130 150 190 150"/><polygon class="pn" points="92,239 104,246 104,258 92,265 80,258 80,246"/><circle cx="92" cy="252" r="2.6" class="pd"/><text x="92" y="277" class="pl">SRC_04</text></g>
+        <path class="pb" data-i="0" stroke="#ffb3d9" d="M270 150 C 294 150 298 50 322 50"/><g class="po" data-i="0" tabindex="0" style="--c:#ffb3d9"><polygon points="330,37 456,37 456,55 448,63 322,63 322,45"/><text class="pidx" x="332" y="53.5">01</text><text x="350" y="53.8" data-i18n="pr.f1">Software</text><circle class="pst" cx="444" cy="50" r="2.4" style="animation-delay:0.0s"/></g><path class="pb" data-i="1" stroke="#ff80c0" d="M270 150 C 294 150 298 100 322 100"/><g class="po" data-i="1" tabindex="0" style="--c:#ff80c0"><polygon points="330,87 456,87 456,105 448,113 322,113 322,95"/><text class="pidx" x="332" y="103.5">02</text><text x="350" y="103.8" data-i18n="pr.f2">Datos</text><circle class="pst" cx="444" cy="100" r="2.4" style="animation-delay:0.4s"/></g><path class="pb" data-i="2" stroke="#ff2d82" d="M270 150 C 294 150 298 150 322 150"/><g class="po" data-i="2" tabindex="0" style="--c:#ff2d82"><polygon points="330,137 456,137 456,155 448,163 322,163 322,145"/><text class="pidx" x="332" y="153.5">03</text><text x="350" y="153.8" data-i18n="pr.f3">Integración</text><circle class="pst" cx="444" cy="150" r="2.4" style="animation-delay:0.8s"/></g><path class="pb" data-i="3" stroke="#d946ef" d="M270 150 C 294 150 298 200 322 200"/><g class="po" data-i="3" tabindex="0" style="--c:#d946ef"><polygon points="330,187 456,187 456,205 448,213 322,213 322,195"/><text class="pidx" x="332" y="203.5">04</text><text x="350" y="203.8" data-i18n="pr.f4">Automatización</text><circle class="pst" cx="444" cy="200" r="2.4" style="animation-delay:1.2000000000000002s"/></g><path class="pb" data-i="4" stroke="#a855f7" d="M270 150 C 294 150 298 250 322 250"/><g class="po" data-i="4" tabindex="0" style="--c:#a855f7"><polygon points="330,237 456,237 456,255 448,263 322,263 322,245"/><text class="pidx" x="332" y="253.5">05</text><text x="350" y="253.8" data-i18n="pr.f5">IA</text><circle class="pst" cx="444" cy="250" r="2.4" style="animation-delay:1.6s"/></g>
+        <g class="pcore">
+          <polygon points="230,104 270,127 270,173 230,196 190,173 190,127" fill="rgba(255,45,130,.07)" stroke="url(#pw)" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M230 150 V196 M230 150 L190 127 M230 150 L270 127" stroke="rgba(255,128,192,.55)" stroke-width="1" fill="none"/>
+          <polygon points="230,126 251,138 251,162 230,174 209,162 209,138" class="pinner"/>
+          <rect class="pscanl" x="188" y="102" width="84" height="9" fill="url(#pscan)" clip-path="url(#pcl)"/>
+          <g class="pv"><circle cx="230" cy="104" r="2.4"/><circle cx="270" cy="127" r="2.4"/><circle cx="270" cy="173" r="2.4"/><circle cx="230" cy="196" r="2.4"/><circle cx="190" cy="173" r="2.4"/><circle cx="190" cy="127" r="2.4"/></g>
+          <text x="230" y="160" class="pmono">V</text>
+        </g>
+      </svg>
+      <div class="pr-cap" data-i18n="pr.cap">Información dispersa → VECTOR → soluciones integradas</div>
+    </div>
+    <div class="reveal">
+      <div class="pr-word">VECTOR</div>
+      <p class="pr-line" data-i18n="pr.tagline">Una idea entra como luz y sale como software, datos, integración, automatización e inteligencia artificial.</p>
+      <p class="pr-rel" data-i18n="pr.rel">VECTOR es mi marca independiente; Belén Milde es mi perfil profesional. Lo que hice para una empresa, como Centro de Datos, es experiencia profesional y no pertenece a VECTOR.</p>
+    </div>
+  </div>
+  <div class="pr-grid"><div class="pr-card reveal"><h3 data-i18n="pr.what_t">Qué es</h3><p data-i18n="pr.what_d">Mi marca de ecosistemas con IA para diseñar y desarrollar soluciones tecnológicas a medida.</p></div><div class="pr-card reveal"><h3 data-i18n="pr.solve_t">Qué problemas resuelve</h3><p data-i18n="pr.solve_d">Información dispersa en varios sistemas, tareas manuales repetitivas y procesos que no se pueden consultar ni auditar.</p></div><div class="pr-card reveal"><h3 data-i18n="pr.build_t">Qué desarrolla</h3><p data-i18n="pr.build_d">Software a medida, backend y full-stack, sistemas de gestión, integración de plataformas, automatización y herramientas con IA aplicada.</p></div><div class="pr-card reveal"><h3 data-i18n="pr.how_t">Cómo trabajo</h3><p data-i18n="pr.how_d">Análisis de la necesidad, diseño del modelo de datos y la arquitectura, desarrollo por etapas y documentación de cada cambio.</p></div><div class="pr-card reveal"><h3 data-i18n="pr.tech_t">Tecnologías</h3><p data-i18n="pr.tech_d">TypeScript, React, Node.js, PostgreSQL, Supabase, n8n y Python.</p></div><div class="pr-card reveal"><h3 data-i18n="pr.proj_t">Proyectos de la marca</h3><p data-i18n="pr.proj_d">Hoy: Prisma, la app principal del ecosistema: gestión para sectores de belleza, implementada y con clientes reales. Se suman más a medida que existan.</p></div>
+    <div class="pr-card reveal"><h3 data-i18n="pr.contact_t">Colaborar</h3><p><span data-i18n="pr.contact_d">¿Un proyecto o una colaboración? Escribime.</span> <a href="#contact" style="color:var(--accent3)">→ Contacto</a></p></div>
+  </div>
+</section>
+
 <section id="about">
   <div class="section-tag reveal" data-i18n="about.tag">Sobre mí</div>
   <h2 class="section-title reveal">About<br><span style="color:var(--muted2)">me</span></h2>
   <div class="about-grid">
     <div class="reveal">
-      <p class="about-text active" id="text-es">Soy <strong>Analista de Sistemas</strong> con base sólida en arquitectura de software, análisis de datos y desarrollo modular. Me especializo en la administración de flujos de información crítica, <strong>ciberseguridad preventiva</strong> e ingeniería de requerimientos en entornos bilingües.<br><br>Trabajo en la intersección entre la lógica del backend y la claridad del dato: sistemas que no solo funcionan, sino que <strong>escalan y resisten</strong>. Actualmente desarrollo <strong>Centro de Datos</strong>, un sistema de reportes con datos reales, y <strong>VECTOR</strong>, mi marca de ecosistemas con IA; además sigo construyendo <strong>MediGest</strong>, un ecosistema de gestión hospitalaria desde cero.</p>
-      <p class="about-text" id="text-en">I'm a <strong>Systems Analyst</strong> with a strong background in software architecture, data analysis and modular development. I specialize in critical information flow management, <strong>preventive cybersecurity</strong> and requirements engineering in bilingual environments.<br><br>I work at the intersection of backend logic and data clarity: systems that don't just work, but <strong>scale and endure</strong>. I currently develop <strong>Centro de Datos</strong>, a reporting system running on real data, and <strong>VECTOR</strong>, my brand of AI-powered ecosystems; I also keep building <strong>MediGest</strong>, a full hospital management ecosystem from scratch.</p>
+      <p class="about-text active" id="text-es">Soy <strong>Analista de Sistemas</strong> con base sólida en arquitectura de software, análisis de datos y desarrollo modular. Me especializo en la administración de flujos de información crítica, <strong>ciberseguridad preventiva</strong> e ingeniería de requerimientos en entornos bilingües.<br><br>Trabajo en la intersección entre la lógica del backend y la claridad del dato: sistemas que no solo funcionan, sino que <strong>escalan y resisten</strong>. Actualmente desarrollo <strong>Centro de Datos</strong>, un sistema de reportes con datos reales, y <strong>VECTOR</strong>, mi marca tecnológica independiente; además sigo construyendo <strong>MediGest</strong>, un ecosistema de gestión hospitalaria desde cero.</p>
+      <p class="about-text" id="text-en">I'm a <strong>Systems Analyst</strong> with a strong background in software architecture, data analysis and modular development. I specialize in critical information flow management, <strong>preventive cybersecurity</strong> and requirements engineering in bilingual environments.<br><br>I work at the intersection of backend logic and data clarity: systems that don't just work, but <strong>scale and endure</strong>. I currently develop <strong>Centro de Datos</strong>, a reporting system running on real data, and <strong>VECTOR</strong>, my independent technology brand; I also keep building <strong>MediGest</strong>, a full hospital management ecosystem from scratch.</p>
       <div class="about-quote" id="about-quote-text"><em>"</em> Construyo sistemas que importan — donde cada línea de código tiene propósito, cada dato tiene dueño, y cada decisión de diseño tiene consecuencias reales. <em>"</em></div>
     </div>
     <div class="reveal">
@@ -549,6 +652,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
           <div class="proj-meta-item"><span data-i18n="proj.status">Estado</span><span style="color:var(--green)" data-i18n="proj.inuse_dot">● En uso</span></div>
           <div class="proj-meta-item"><span data-i18n="proj.sources">Fuentes</span><span>Naaloo · Geest · Obersat</span></div>
           <div class="proj-meta-item"><span data-i18n="proj.access">Acceso</span><span data-i18n="proj.access_val">Interno · privado</span></div>
+          <div class="proj-meta-item"><span data-i18n="proj.origin">Origen</span><span data-i18n="proj.o_pro">Experiencia profesional</span></div>
         </div>
         <div class="proj-links"><a href="./centro-de-datos-case-study.html" class="proj-link proj-link-primary" data-i18n="proj.casestudy">Ver caso de estudio →</a></div>
       </div>
@@ -560,22 +664,22 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
         <div class="proj-top">
           <div><div class="proj-title">VECTOR</div><div class="proj-subtitle" data-i18n="proj.vector_sub">Ecosistemas con IA</div></div>
         </div>
-        <p class="proj-desc" data-i18n-html="proj.vector_desc">Mi marca de ecosistemas con IA. Reúne los sistemas de gestión que construyo para negocios, y dentro de ella vive Prisma.</p>
+        <p class="proj-desc" data-i18n-html="proj.vector_desc">Mi marca de ecosistemas con IA: soluciones a medida para negocios. Su app principal es Prisma, ya implementada y con clientes reales. Sus proyectos se muestran acá, separados de mi experiencia en empresas.</p>
         <div style="background:rgba(255,45,130,0.05);border:0.5px solid rgba(255,45,130,0.18);border-radius:14px;padding:1rem">
-          <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent3);margin-bottom:0.75rem" data-i18n="proj.inside_vector">Dentro de VECTOR</div>
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent3);margin-bottom:0.75rem" data-i18n="proj.inside_vector">App principal del ecosistema</div>
           <div class="proj-top">
-            <div><div class="proj-title" style="font-size:1.15rem">Prisma</div><div class="proj-subtitle" data-i18n="proj.prisma_sub">Gestión de turnos para estética</div></div>
+            <div><div class="proj-title" style="font-size:1.15rem">Prisma</div><div class="proj-subtitle" data-i18n="proj.prisma_sub">Gestión para sectores de belleza</div></div>
             <div class="proj-badges"><span class="mbadge mbadge-green"><span class="active-dot" style="display:inline-block;margin-right:5px"></span><span data-i18n="proj.inuse">En uso</span></span></div>
           </div>
-          <p class="proj-desc" style="margin:0.75rem 0" data-i18n-html="proj.prisma_desc">Sistema de gestión para un negocio de estética: agenda con varias profesionales, clientes, caja, stock, recordatorios y reserva online pública para que las clientas saquen turno solas.</p>
+          <p class="proj-desc" style="margin:0.75rem 0" data-i18n-html="proj.prisma_desc">Sistema de gestión para sectores de belleza, implementado y en uso con clientes reales: agenda con varias profesionales, clientes, caja, stock, recordatorios y reserva online pública.</p>
           <div class="proj-stack" style="margin-bottom:0.75rem"><span class="stack-tag"><i class="devicon-react-original di"></i>React</span><span class="stack-tag">Supabase</span><span class="stack-tag"><i class="devicon-postgresql-plain di"></i>PostgreSQL</span></div>
-          <span style="font-family:var(--mono);font-size:10px;color:var(--muted2);font-style:italic" data-i18n="proj.private_client">Proyecto para cliente · código privado</span>
+          <span style="font-family:var(--mono);font-size:10px;color:var(--muted2);font-style:italic" data-i18n="proj.private_client">Producto propio · código privado</span>
         </div>
       </div>
       <div class="proj-card-right">
         <div class="proj-meta">
           <div class="proj-meta-item"><span data-i18n="proj.brand">Marca</span><span data-i18n="proj.vector_sub">Ecosistemas con IA</span></div>
-          <div class="proj-meta-item"><span data-i18n="proj.includes">Incluye</span><span>Prisma</span></div>
+          <div class="proj-meta-item"><span data-i18n="proj.origin">Origen</span><span data-i18n="proj.o_brand">Marca propia</span></div><div class="proj-meta-item"><span data-i18n="proj.includes">Incluye</span><span>Prisma</span></div><div class="proj-meta-item"><span>→</span><a href="#vector" data-i18n="proj.seebrand">Ver VECTOR</a></div>
           <div class="proj-meta-item"><span data-i18n="proj.status">Estado</span><span style="color:var(--green)" data-i18n="proj.inuse_dot">● En uso</span></div>
         </div>
       </div>
@@ -623,6 +727,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
           <div class="proj-meta-item"><span data-i18n="proj.repo">Repo</span><span style="color:var(--accent)">github.com/belenmm1</span></div>
           <div class="proj-meta-item"><span data-i18n="proj.demo">Demo</span><span style="color:var(--green)" data-i18n="proj.live">● Live en Railway</span></div>
           <div class="proj-meta-item"><span>Stack</span><span>Full-stack · HIS</span></div>
+          <div class="proj-meta-item"><span data-i18n="proj.origin">Origen</span><span data-i18n="proj.o_personal">Proyecto personal</span></div>
         </div>
         <div class="proj-links">
           <a href="./medigest-case-study.html" class="proj-link proj-link-primary" data-i18n="proj.casestudy">Ver caso de estudio →</a>
@@ -765,13 +870,13 @@ const i18n={
     'proj.tag':'Proyectos','proj.star':'⭐ Proyecto estrella','proj.active':'Activo','proj.new':'Nuevo','proj.indev':'En desarrollo activo',
     'proj.repo':'Repo','proj.demo':'Demo','proj.live':'● Live en Railway','proj.demolink':'🚀 Demo live →','proj.be_meta':'+3,500 líneas · 8 módulos',
     'proj.frontend':'Frontend · SPA','proj.backend':'Backend · REST API','proj.casestudy':'Ver caso de estudio →',
-    'proj.inuse':'En uso','proj.cdd_b1':'Tres fuentes (Naaloo, Geest, Obersat) en un solo centro de control, con mapa de flota en vivo','proj.cdd_b2':'TDS IA: señales con reglas explícitas; la IA solo redacta y el servidor valida cada cifra','proj.cdd_b3':'Permisos aplicados en el servidor, auditoría completa y 17 migraciones SQL versionadas','proj.cdd_b4':'Nunca inventa datos: sin fuente, muestra «sin datos»','proj.inuse_dot':'● En uso','proj.status':'Estado','proj.sources':'Fuentes','proj.access':'Acceso','proj.access_val':'Interno · privado','proj.brand':'Marca','proj.includes':'Incluye','proj.inside_vector':'Dentro de VECTOR','proj.vector_sub':'Ecosistemas con IA','proj.flow':'// flujo de datos · Centro de Datos','proj.private':'Sistema interno · código privado','proj.private_client':'Proyecto para cliente · código privado',
+    'pr.tag':'Marca tecnológica','pr.cap':'Información dispersa → VECTOR → soluciones integradas','pr.tagline':'Una idea entra como luz y sale como software, datos, integración, automatización e inteligencia artificial.','pr.rel':'VECTOR es mi marca independiente; Belén Milde es mi perfil profesional. Lo que hice para una empresa, como Centro de Datos, es experiencia profesional y no pertenece a VECTOR.','pr.f1':'Software','pr.f2':'Datos','pr.f3':'Integración','pr.f4':'Automatización','pr.f5':'IA','pr.what_t':'Qué es','pr.what_d':'Mi marca de ecosistemas con IA para diseñar y desarrollar soluciones tecnológicas a medida.','pr.solve_t':'Qué problemas resuelve','pr.solve_d':'Información dispersa en varios sistemas, tareas manuales repetitivas y procesos que no se pueden consultar ni auditar.','pr.build_t':'Qué desarrolla','pr.build_d':'Software a medida, backend y full-stack, sistemas de gestión, integración de plataformas, automatización y herramientas con IA aplicada.','pr.how_t':'Cómo trabajo','pr.how_d':'Análisis de la necesidad, diseño del modelo de datos y la arquitectura, desarrollo por etapas y documentación de cada cambio.','pr.tech_t':'Tecnologías','pr.tech_d':'TypeScript, React, Node.js, PostgreSQL, Supabase, n8n y Python.','pr.proj_t':'Proyectos de la marca','pr.proj_d':'Hoy: Prisma, la app principal del ecosistema: gestión para sectores de belleza, implementada y con clientes reales. Se suman más a medida que existan.','pr.contact_t':'Colaborar','pr.contact_d':'¿Un proyecto o una colaboración? Escribime.','proj.origin':'Origen','proj.o_pro':'Experiencia profesional','proj.o_brand':'Marca propia','proj.o_personal':'Proyecto personal','proj.seebrand':'Ver VECTOR','proj.inuse':'En uso','proj.cdd_b1':'Tres fuentes (Naaloo, Geest, Obersat) en un solo centro de control, con mapa de flota en vivo','proj.cdd_b2':'TDS IA: señales con reglas explícitas; la IA solo redacta y el servidor valida cada cifra','proj.cdd_b3':'Permisos aplicados en el servidor, auditoría completa y 17 migraciones SQL versionadas','proj.cdd_b4':'Nunca inventa datos: sin fuente, muestra «sin datos»','proj.inuse_dot':'● En uso','proj.status':'Estado','proj.sources':'Fuentes','proj.access':'Acceso','proj.access_val':'Interno · privado','proj.brand':'Marca','proj.includes':'Incluye','proj.inside_vector':'App principal del ecosistema','proj.vector_sub':'Ecosistemas con IA','proj.flow':'// flujo de datos · Centro de Datos','proj.private':'Sistema interno · código privado','proj.private_client':'Producto propio · código privado',
     'proj.medigest_desc':'Sistema de gestión hospitalaria completo construido desde cero — como meta real para volcar todo lo que estaba aprendiendo. El resultado fue bastante más grande de lo que imaginé cuando escribí el primer commit.',
     'proj.tds_sub':'Reportes de gestión · sistema interno',
     'proj.tds_desc':'Sistema interno que centraliza datos operativos de varias fuentes (Naaloo, Geest, Obersat) en una base PostgreSQL propia, alimentada por flujos de n8n. Incluye perfiles de acceso por rol (administrador / técnico) y un centro de control con datos reales.',
-    'proj.vector_desc':'Mi marca de ecosistemas con IA. Reúne los sistemas de gestión que construyo para negocios, y dentro de ella vive Prisma.',
-    'proj.prisma_sub':'Gestión de turnos para estética',
-    'proj.prisma_desc':'Sistema de gestión para un negocio de estética: agenda con varias profesionales, clientes, caja, stock, recordatorios y reserva online pública para que las clientas saquen turno solas.',
+    'proj.vector_desc':'Mi marca de ecosistemas con IA: soluciones a medida para negocios. Su app principal es Prisma, ya implementada y con clientes reales. Sus proyectos se muestran acá, separados de mi experiencia en empresas.',
+    'proj.prisma_sub':'Gestión para sectores de belleza',
+    'proj.prisma_desc':'Sistema de gestión para sectores de belleza, implementado y en uso con clientes reales: agenda con varias profesionales, clientes, caja, stock, recordatorios y reserva online pública.',
     'exp.tag':'Trayectoria','exp.present':'presente','exp.year':'año','exp.years':'años',
     'exp.tds_dev':'Desarrollo de Centro de Datos, sistema interno de reportes de gestión con datos reales: frontend en React/TypeScript, API y PostgreSQL (Supabase), deploy en Vercel','exp.tds_n8n':'Automatización con n8n: flujos que integran Naaloo, Geest y Obersat (GPS) en una base de datos propia','exp.tds1':'Supervisión integral de datos entrantes/salientes para asegurar integridad corporativa','exp.tds2':'Control de versiones y backup de activos digitales y código fuente','exp.tds3':'Coordinación operativa y soporte administrativo para procesos de RRHH',
     'exp.shine1':'Auditoría de flujos de datos financieros y operativos','exp.shine2':'Implementación de políticas de backup para registros críticos','exp.shine3':'Coordinación de workflows y resolución de requerimientos técnicos internos',
@@ -794,13 +899,13 @@ const i18n={
     'proj.tag':'Projects','proj.star':'⭐ Star project','proj.active':'Active','proj.new':'New','proj.indev':'In active development',
     'proj.repo':'Repo','proj.demo':'Demo','proj.live':'● Live on Railway','proj.demolink':'🚀 Live demo →','proj.be_meta':'+3,500 lines · 8 modules',
     'proj.frontend':'Frontend · SPA','proj.backend':'Backend · REST API','proj.casestudy':'View case study →',
-    'proj.inuse':'In use','proj.cdd_b1':'Three sources (Naaloo, Geest, Obersat) in one control center, with a live fleet map','proj.cdd_b2':'TDS IA: signals from explicit rules; the AI only writes them up and the server validates every figure','proj.cdd_b3':'Server-side permissions, full audit trail and 17 versioned SQL migrations','proj.cdd_b4':'Never invents data: with no source, it shows “no data”','proj.inuse_dot':'● In use','proj.status':'Status','proj.sources':'Sources','proj.access':'Access','proj.access_val':'Internal · private','proj.brand':'Brand','proj.includes':'Includes','proj.inside_vector':'Inside VECTOR','proj.vector_sub':'AI-powered ecosystems','proj.flow':'// data flow · Centro de Datos','proj.private':'Internal system · private code','proj.private_client':'Client project · private code',
+    'pr.tag':'Tech brand','pr.cap':'Scattered information → VECTOR → integrated solutions','pr.tagline':'An idea enters as light and comes out as software, data, integration, automation and artificial intelligence.','pr.rel':'VECTOR is my independent brand; Belén Milde is my professional profile. Work I did for a company, like Centro de Datos, is professional experience and does not belong to VECTOR.','pr.f1':'Software','pr.f2':'Data','pr.f3':'Integration','pr.f4':'Automation','pr.f5':'AI','pr.what_t':'What it is','pr.what_d':'My brand of AI-powered ecosystems for designing and building custom technology solutions.','pr.solve_t':'Problems it solves','pr.solve_d':'Information scattered across systems, repetitive manual tasks and processes that cannot be queried or audited.','pr.build_t':'What it builds','pr.build_d':'Custom software, backend and full-stack, management systems, platform integration, automation and applied-AI tools.','pr.how_t':'How I work','pr.how_d':'Needs analysis, data-model and architecture design, staged development and documentation of every change.','pr.tech_t':'Technologies','pr.tech_d':'TypeScript, React, Node.js, PostgreSQL, Supabase, n8n and Python.','pr.proj_t':'Brand projects','pr.proj_d':'Today: Prisma, the main app of the ecosystem: management for beauty businesses, implemented and used by real clients. More will be added as they exist.','pr.contact_t':'Collaborate','pr.contact_d':'A project or a collaboration? Write to me.','proj.origin':'Origin','proj.o_pro':'Professional experience','proj.o_brand':'Own brand','proj.o_personal':'Personal project','proj.seebrand':'See VECTOR','proj.inuse':'In use','proj.cdd_b1':'Three sources (Naaloo, Geest, Obersat) in one control center, with a live fleet map','proj.cdd_b2':'TDS IA: signals from explicit rules; the AI only writes them up and the server validates every figure','proj.cdd_b3':'Server-side permissions, full audit trail and 17 versioned SQL migrations','proj.cdd_b4':'Never invents data: with no source, it shows “no data”','proj.inuse_dot':'● In use','proj.status':'Status','proj.sources':'Sources','proj.access':'Access','proj.access_val':'Internal · private','proj.brand':'Brand','proj.includes':'Includes','proj.inside_vector':'Main app of the ecosystem','proj.vector_sub':'AI-powered ecosystems','proj.flow':'// data flow · Centro de Datos','proj.private':'Internal system · private code','proj.private_client':'Own product · private code',
     'proj.medigest_desc':'Complete hospital management system built from scratch — as a real goal to apply everything I was learning. The result ended up being much bigger than I imagined when I wrote the first commit.',
     'proj.tds_sub':'Management reporting · internal system',
     'proj.tds_desc':'Internal system that centralizes operational data from several sources (Naaloo, Geest, Obersat) into its own PostgreSQL database, fed by n8n workflows. Includes role-based access profiles (admin / technician) and a control center running on real data.',
-    'proj.vector_desc':'My brand of AI-powered ecosystems. It brings together the management systems I build for businesses, and Prisma lives inside it.',
-    'proj.prisma_sub':'Appointment management for a beauty studio',
-    'proj.prisma_desc':'Management system for a beauty business: multi-professional calendar, clients, cash register, stock, reminders and a public online booking page so clients can book on their own.',
+    'proj.vector_desc':'My brand of AI-powered ecosystems: custom solutions for businesses. Its main app is Prisma, already implemented and used by real clients. Its projects are shown here, separate from my work for companies.',
+    'proj.prisma_sub':'Management for beauty businesses',
+    'proj.prisma_desc':'Management system for beauty businesses, implemented and in use with real clients: multi-professional calendar, clients, cash register, stock, reminders and public online booking.',
     'exp.tag':'Experience','exp.present':'present','exp.year':'year','exp.years':'years',
     'exp.tds_dev':'Development of Centro de Datos, an internal management reporting system on real data: React/TypeScript frontend, API and PostgreSQL (Supabase), deployed on Vercel','exp.tds_n8n':'Automation with n8n: workflows integrating Naaloo, Geest and Obersat (GPS) into a dedicated database','exp.tds1':'Comprehensive supervision of inbound/outbound data to ensure corporate integrity','exp.tds2':'Version control and backup of digital assets and source code','exp.tds3':'Operational coordination and administrative support for HR processes',
     'exp.shine1':'Audit of financial and operational data flows','exp.shine2':'Implementation of backup policies for critical records','exp.shine3':'Workflow coordination and resolution of internal technical requirements',
@@ -1132,7 +1237,7 @@ if(!RM)addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;if(tk)return
 /* scroll: barra de progreso, parallax y sección activa */
 const prog=document.getElementById('fx-progress');let st=0;
 addEventListener('scroll',()=>{if(st)return;st=1;requestAnimationFrame(()=>{st=0;const m=root.scrollHeight-innerHeight;prog.style.transform='scaleX('+(m>0?scrollY/m:0)+')';root.style.setProperty('--sy',scrollY)})},{passive:true});
-const sec=document.getElementById('fx-sec'),ids=['hero','about','projects','experience','education','skills','contact'];
+const sec=document.getElementById('fx-sec'),ids=['hero','vector','about','projects','experience','education','skills','contact'];
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)sec.innerHTML='// 0'+(ids.indexOf(e.target.id)+1)+' · <b>'+e.target.id.toUpperCase()+'</b>'}),{rootMargin:'-45% 0px -50% 0px'});
 ids.forEach(id=>{const e=document.getElementById(id);if(e)io.observe(e)});
 /* reloj HUD (se pausa con la pestaña oculta) */
@@ -1154,6 +1259,14 @@ document.querySelectorAll('.fx-flow svg').forEach(svg=>{const ns='http://www.w3.
 /* transición al cambiar de idioma: barrido de escaneo + texto que se re-enfoca */
 window.fxScan=function(){document.body.classList.add('lang-flip');setTimeout(()=>document.body.classList.remove('lang-flip'),600);if(RM)return;const s=document.getElementById('fx-scan');s.classList.remove('go');void s.offsetWidth;s.classList.add('go')};
 })();
+</script>
+<script>
+(function(){const svg=document.getElementById('pr-svg');if(!svg)return;const bm=svg.querySelectorAll('.pb[data-i]'),ns='http://www.w3.org/2000/svg';
+svg.querySelectorAll('.po').forEach(g=>{const i=g.dataset.i,on=()=>{svg.classList.add('hl');bm[i].classList.add('on')},off=()=>{svg.classList.remove('hl');bm[i].classList.remove('on')};
+['mouseenter','focus'].forEach(e=>g.addEventListener(e,on));['mouseleave','blur'].forEach(e=>g.addEventListener(e,off))});
+svg.querySelectorAll('.pb').forEach((p,i)=>{const c=document.createElementNS(ns,'circle'),a=document.createElementNS(ns,'animateMotion');c.setAttribute('r',2.6);c.setAttribute('fill',p.getAttribute('stroke')||'#ff80c0');c.style.filter='drop-shadow(0 0 4px #ff2d82)';
+a.setAttribute('dur',(2.2+(i%3)*.4)+'s');a.setAttribute('begin',(i*.35)+'s');a.setAttribute('repeatCount','indefinite');a.setAttribute('path',p.getAttribute('d'));c.append(a);svg.append(c)});
+if(matchMedia('(prefers-reduced-motion: reduce)').matches&&svg.pauseAnimations)svg.pauseAnimations()})();
 </script>
 </body>
 </html>
